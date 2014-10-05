@@ -36,8 +36,8 @@ class HTMLView {
         </div>
         <div class='collapse navbar-collapse'>
           <ul class='nav navbar-nav'>
-            <li class='active'><a href='?'>Home</a></li>
-            <li><a href='?login'>Login</a></li>
+            <li><a href='?'>Home</a></li>
+            <li><a href='?action=login'>Login</a></li>
           </ul>
         </div>
       </div>
