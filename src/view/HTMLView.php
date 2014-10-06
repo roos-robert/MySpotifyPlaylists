@@ -16,9 +16,9 @@ class HTMLView {
     <meta name='description' content=''>
     <meta name='author' content='Robert Roos'>
     <link rel='icon' href='../../favicon.ico'>
-    <title>MySpotifyPlaylists</title>
-    <link href='css/bootstrap.min.css' rel='stylesheet'>
-    <link href='css/style.css' rel='stylesheet'>
+    <title>Mixtapeify</title>
+    <link href='src/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='src/css/style.css' rel='stylesheet'>
   </head>
 
   <body>
@@ -32,7 +32,7 @@ class HTMLView {
             <span class='icon-bar'></span>
             <span class='icon-bar'></span>
           </button>
-          <a class='navbar-brand' href='?'>My Spotify Playlists</a>
+          <a class='navbar-brand' href='?'>Mixtapeify</a>
         </div>
         <div class='collapse navbar-collapse'>
           <ul class='nav navbar-nav'>
@@ -43,16 +43,12 @@ class HTMLView {
       </div>
     </div>
 
-    <div class='container'>
-      <div class='starter-template'>
-        $body
-      </div>
-    </div>
+    $body
 
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
-    <script src='../../dist/js/bootstrap.min.js'></script>
+    <script src='src/js/bootstrap.min.js'></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src='js/ie10-viewport-bug-workaround.js'></script>
+    <script src='src/js/ie10-viewport-bug-workaround.js'></script>
   </body>
 </html>
 ";

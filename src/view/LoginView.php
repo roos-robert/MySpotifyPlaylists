@@ -4,7 +4,9 @@ namespace view;
 class LoginView {
     public function showPage() {
         return "
-<h1>Login</h1>
-<p class='lead'>Content</p>";
+    <div class='container'>
+        <h2>Login</h2>
+        <p>Login here.</p>
+    </div>";
     }
 }
