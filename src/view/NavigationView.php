@@ -6,6 +6,7 @@ class NavigationView {
     private static $action = 'action';
 
     public static $actionLogin = 'login';
+    public static $actionSignup = 'signup';
     public static $home = 'home';
 
     public static function getAction() {
