@@ -36,7 +36,6 @@ class HTMLView {
         </div>
         <div class='collapse navbar-collapse'>
           <ul class='nav navbar-nav'>
-            <li><a href='?'>Home</a></li>
             <li><a href='?action=login'>Login</a></li>
           </ul>
         </div>
@@ -44,6 +43,12 @@ class HTMLView {
     </div>
 
     $body
+
+    <div class='footer'>
+      <div class='container'>
+        <p class='text-muted'>&copy; Copyright 2014 - Producerad av: <a href='http://www.robertroos.eu'>RobertRoos.eu</a></p>
+      </div>
+    </div>
 
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
     <script src='src/js/bootstrap.min.js'></script>
