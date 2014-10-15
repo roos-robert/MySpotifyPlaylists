@@ -14,9 +14,9 @@ class UserRepository extends Repository {
     private static $name = "Name";
     private $user;
 
-    public function __construct(User $user) {
+    public function __construct() {
         $this->dbTable = "user";
-        $this->user = $user;
+       //$this->user = $user;
     }
 
     public function add($username, $password, $email, $name) {
@@ -37,7 +37,7 @@ class UserRepository extends Repository {
         $result = $query->fetch();
         if($result)
         {
-            $this->user->setUser($result[self::$username], $result[self::$password], $result[self::$key]);
+            //$this->user->setUser($result[self::$username], $result[self::$password], $result[self::$key]);
             return $result;
         }
         return NULL;

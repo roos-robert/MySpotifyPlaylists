@@ -2,13 +2,36 @@
 
 namespace model;
 
+require_once("src/model/UserRepository.php");
+
 class UserModel {
 
+    private $userRepository;
     private $sessionLocation = "LoggedIn";
     private $sessionUsername = "Username";
 
+    public function __construct() {
+        $this->userRepository = new \model\UserRepository();
+    }
+
     // Checks the credentials, if correct the LoggedIn session is set to true.
     public function doLogin($username, $password) {
+
+        $user = $this->userRepository->get($username);
+
+        if($user != NULL)
+        {
+            if($user["Username"] == $username && $user["Password"] == $password)
+            {
+                $_SESSION[$this->sessionLocation] = true;
+                $_SESSION[$this->sessionUsername] = $username;
+            }
+        }
+        else
+        {
+            throw new \Exception;
+        }
+
         if($username == "Admin" && $password == "Password")
         {
             $_SESSION[$this->sessionLocation] = true;

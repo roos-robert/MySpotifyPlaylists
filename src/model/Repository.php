@@ -1,6 +1,6 @@
 <?php
 
-namespace models;
+namespace model;
 
 require_once("./Settings.php");
 
