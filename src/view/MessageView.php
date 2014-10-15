@@ -7,7 +7,7 @@ class MessageView {
     public function save($string) {
         $_SESSION[$this->message] = $string;
     }
-    
+
     // Function for retrieving the message, present it, and delete it.
     public function load() {
         if(isset($_SESSION[$this->message]))

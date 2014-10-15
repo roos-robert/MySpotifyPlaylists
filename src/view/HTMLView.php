@@ -2,6 +2,13 @@
 
 class HTMLView {
 
+    private $model;
+
+    public function __construct()
+    {
+        $this->model = new \model\UserModel();
+    }
+
     public function echoHTML($body) {
         if ($body === NULL) {
             throw new \Exception("HTMLView::echoHTML does not allow body to be null");
@@ -35,8 +42,16 @@ class HTMLView {
           <a class='navbar-brand' href='?'>Mixtapeify</a>
         </div>
         <div class='collapse navbar-collapse'>
-          <ul class='nav navbar-nav'>
-            <li><a href='?action=login'>Login</a></li>
+          <ul class='nav navbar-nav'>";
+          if ($this->model->getLoginStatus() == false)
+          {
+            echo "<li><a href='?action=login'>Login</a></li>";
+          }
+          else
+          {
+              echo "<li><a href='?action=login&logout=true'>Logout</a></li>";
+          }
+             echo "
           </ul>
         </div>
       </div>

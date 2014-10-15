@@ -6,10 +6,12 @@ require_once("src/view/HomeView.php");
 
 class HomeController {
     private $view;
+    private $model;
 
     // Constructor, connects all the layers
     public function __construct() {
-        $this->view = new \view\HomeView();
+        $this->model = new \model\UserModel();
+        $this->view = new \view\HomeView($this->model);
     }
 
     public function checkActions() {
