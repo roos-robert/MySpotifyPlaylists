@@ -2,6 +2,7 @@
 
 namespace models;
 
+require_once("./Settings.php");
 
 abstract class Repository {
     protected $dbConnection;

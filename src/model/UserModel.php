@@ -32,7 +32,7 @@ class UserModel {
             return true;
         }
     }
-    
+
     // Function for retrieving the username of the user currently logged in.
     public function retriveUsername() {
         return $_SESSION[$this->sessionUsername];
