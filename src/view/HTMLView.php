@@ -49,7 +49,10 @@ class HTMLView {
           }
           else
           {
-              echo "<li><a href='?action=login&logout=true'>Logout</a></li>";
+              echo "
+              <li><a href='?action=newMixtape'>New mixtape</a></li>
+              <li><a href='?action=myMixtapes'>My mixtapes</a></li>
+              <li><a href='?action=login&logout=true'>Logout</a></li>";
           }
              echo "
           </ul>

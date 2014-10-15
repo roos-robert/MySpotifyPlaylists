@@ -54,7 +54,7 @@ class LoginView {
                 <fieldset>
                 <legend>Enter your username and password</legend><p>" . $this->messages->load() . "</p>
                 <label><strong>Username: </strong></label>
-                <input type='text' name='username' class='form-control' value='$username /><br />
+                <input type='text' name='username' class='form-control' value='$username' /><br />
                 <label><strong>Password: </strong></label>
                 <input type='password' name='password' class='form-control' value='' /><br />
                 <label><strong>Keep me logged in: </strong></label>
