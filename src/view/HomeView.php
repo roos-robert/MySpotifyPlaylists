@@ -23,6 +23,7 @@ class HomeView {
                     </div>
 
                     <div class='container'>
+                        <p>" . $this->messages->load() . "</p>
                         <h2>Welcome!</h2>
                         <p>Want to save and share Spotify playlists? You've come to the right place!</p>
                         <h3>It's easy!</h3>

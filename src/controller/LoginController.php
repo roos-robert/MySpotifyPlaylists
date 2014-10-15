@@ -99,7 +99,8 @@ class LoginController {
             $this->autoLogin->autoLoginCookieRemove();
             $this->model->doLogout();
             $this->messages->save("You have been logged out!");
-            return $this->view->showPage();
+            header('Location: index.php');
+            exit;
         }
 
         return $this->view->showPage();

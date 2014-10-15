@@ -20,6 +20,19 @@ class UserModel {
         }
     }
 
+    // Automatic login.
+    public function doAutoLogin($username, $token) {
+        if ($username == "Admin" && $this->retriveToken($username) == $token)
+        {
+            $_SESSION[$this->sessionLocation] = true;
+            $_SESSION[$this->sessionUsername] = $username;
+        }
+        else
+        {
+            throw new \Exception;
+        }
+    }
+
     // When a user wants to logout, the session is returned to be null.
     public function doLogout() {
         $_SESSION[$this->sessionLocation] = null;
@@ -40,5 +53,9 @@ class UserModel {
     // Function for retrieving the username of the user currently logged in.
     public function retriveUsername() {
         return $_SESSION[$this->sessionUsername];
+    }
+
+    public function retriveToken($username) {
+        return "fsdfsf2uy39fy392f923oif23";
     }
 }
