@@ -3,6 +3,10 @@
 namespace model;
 
 class UserModel {
+
+    private $sessionLocation = "LoggedIn";
+    private $sessionUsername = "Username";
+
     // Checks the credentials, if correct the LoggedIn session is set to true.
     public function doLogin($username, $password) {
         if($username == "Admin" && $password == "Password")
