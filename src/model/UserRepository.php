@@ -11,7 +11,6 @@ class UserRepository extends Repository {
     private static $password = "Password";
     private static $key = "LoginToken";
     private static $email = "Email";
-    private static $name = "Name";
     private $user;
 
     public function __construct() {
@@ -19,11 +18,11 @@ class UserRepository extends Repository {
        //$this->user = $user;
     }
 
-    public function add($username, $password, $email, $name) {
+    public function add($username, $password, $email) {
         $randomKey = md5(time());
         $db = $this->connection();
-        $sql = "INSERT INTO $this->dbTable(" . self::$username . ", " . self::$password . ", " . self::$key . ", " . self::$email . ", " . self::$name . ") VALUES (?, ?, ?, ?, ?)";
-        $params = array($username, md5($password), $randomKey, $email, $name);
+        $sql = "INSERT INTO $this->dbTable(" . self::$username . ", " . self::$password . ", " . self::$key . ", " . self::$email . ") VALUES (?, ?, ?, ?)";
+        $params = array($username, md5($password), $randomKey, $email);
         $query = $db->prepare($sql);
         $query->execute($params);
     }
