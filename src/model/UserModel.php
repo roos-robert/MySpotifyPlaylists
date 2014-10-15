@@ -16,7 +16,6 @@ class UserModel {
 
     // Checks the credentials, if correct the LoggedIn session is set to true.
     public function doLogin($username, $password) {
-
         $user = $this->userRepository->get($username);
 
         if($user != NULL)
@@ -26,16 +25,6 @@ class UserModel {
                 $_SESSION[$this->sessionLocation] = true;
                 $_SESSION[$this->sessionUsername] = $username;
             }
-        }
-        else
-        {
-            throw new \Exception;
-        }
-
-        if($username == "Admin" && $password == "Password")
-        {
-            $_SESSION[$this->sessionLocation] = true;
-            $_SESSION[$this->sessionUsername] = $username;
         }
         else
         {
@@ -79,6 +68,11 @@ class UserModel {
     }
 
     public function retriveToken($username) {
-        return "fsdfsf2uy39fy392f923oif23";
+        $user = $this->userRepository->get($username);
+
+        if($user != NULL)
+        {
+            return $user["LoginToken"];
+        }
     }
 }
