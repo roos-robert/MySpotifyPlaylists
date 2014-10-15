@@ -22,7 +22,7 @@ class HTMLView {
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <meta name='description' content=''>
     <meta name='author' content='Robert Roos'>
-    <link rel='icon' href='../../favicon.ico'>
+    <link rel='icon' href='./favicon.ico'>
     <title>Mixtapeify</title>
     <link href='src/css/bootstrap.min.css' rel='stylesheet'>
     <link href='src/css/style.css' rel='stylesheet'>

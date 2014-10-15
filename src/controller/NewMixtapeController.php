@@ -61,7 +61,7 @@ class NewMixtapeController {
                         return $this->view->showPage();
                     }
                 }
-                
+
                 //var_dump($mixtapeLinksValidated);
                 //die;
             }
