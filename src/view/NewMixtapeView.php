@@ -40,15 +40,6 @@ class NewMixtapeView {
         $target_dir = $target_dir . time() . "-" . basename( $_FILES["image"]["name"]);
         $uploadOk=1;
 
-        if (($_FILES["image"] != "image/jpg")) {
-            echo "Sorry, only .jpg files are allowed.";
-            $uploadOk = 0;
-        }
-        else
-        {
-            throw new \Exception();
-        }
-
         if($uploadOk != 1)
         {
             throw new \Exception();
@@ -103,6 +94,14 @@ class NewMixtapeView {
         }
 
         return true;
+    }
+
+    public function showMixtapeAdded() {
+        return "
+        <div class='container'>
+            <h1>Success!</h1>
+             <p>The mixtape has been added, you can now find it under the section 'My Mixtapes'!</p>
+        </div>";
     }
 
     public function showPage() {

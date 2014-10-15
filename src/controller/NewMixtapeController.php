@@ -50,6 +50,8 @@ class NewMixtapeController {
                 {
 
                 }
+
+                return $this->view->showMixtapeAdded();
             }
         }
 
