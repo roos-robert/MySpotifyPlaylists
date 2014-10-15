@@ -20,7 +20,7 @@ class UserModel {
 
         if($user != NULL)
         {
-            if($user["Username"] == $username && $user["Password"] == $password)
+            if($user["Username"] == $username && $user["Password"] == md5($password))
             {
                 $_SESSION[$this->sessionLocation] = true;
                 $_SESSION[$this->sessionUsername] = $username;

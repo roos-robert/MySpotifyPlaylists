@@ -33,7 +33,10 @@ class SignupController {
             {
                 $this->userRepository->add($this->view->getPostedUsername(), $this->view->getPostedPassword(), $this->view->getPostedEmail());
                 return $this->view->showSignupMessage();
-
+            }
+            else
+            {
+                return $this->view->showPage();
             }
         }
         else

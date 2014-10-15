@@ -72,7 +72,7 @@ class SignupView {
             $this->messages->save($error);
             return false;
         }
-        if(strpbrk($this->getPostedUsername(), '<>""./') || strpbrk($this->getPostedEmail(), '<>""./'))
+        if(strpbrk($this->getPostedUsername(), '<>""./') || strpbrk($this->getPostedEmail(), '<>""/'))
         {
             $error .= " - Username and/or email contains illegal characters ";
             $this->messages->save($error);
