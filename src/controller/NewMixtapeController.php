@@ -25,7 +25,7 @@ class NewMixtapeController {
 
     public function checkActions() {
 
-        // NOTE TO SELF, A URI HAZ 22 chars. Can prob use explode().
+        // NOTE TO SELF, A URI HAZ 22 chars.
 
         // If a user tries to login, the input is checked and validated.
         if($this->view->onClickAddMixtape())
@@ -40,7 +40,30 @@ class NewMixtapeController {
             }
             else
             {
+                $mixtapeLinksValidated = array();
 
+                // Splits the values at "newline" and throws them into a array
+                $mixtapeLinks = explode("\n", $this->getPostedMixtapeLinks());
+                // Arrays whos indexes contains nothing are removed
+                $emptyRemoved = array_diff($mixtapeLinks, array(''));
+
+                // Trimming away unwanted whitespaces from the links (if they exist)
+                foreach ($emptyRemoved as $mixtapeLink) {
+                    array_push($mixtapeLinksValidated, trim($mixtapeLink));
+                }
+
+                // Validates that the mixtape links truly are Spotify URI links
+                foreach ($mixtapeLinksValidated as $mixtapeLink)
+                {
+                    if(strlen($mixtapeLink) != 36)
+                    {
+                        $this->messages->save("Mixtape contains non-Spotify URI links");
+                        return $this->view->showPage();
+                    }
+                }
+                
+                //var_dump($mixtapeLinksValidated);
+                //die;
             }
         }
 
