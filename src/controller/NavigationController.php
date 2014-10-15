@@ -34,7 +34,7 @@ class NavigationController {
                     return $this->controller->checkActions();
                     break;
                 case \view\NavigationView::$actionMyMixtapes:
-                    $this->controller = new SignupController();
+                    $this->controller = new HomeController();
                     return $this->controller->checkActions();
                     break;
                 default:

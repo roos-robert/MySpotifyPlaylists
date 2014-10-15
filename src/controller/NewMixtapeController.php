@@ -12,6 +12,9 @@ class NewMixtapeController {
     }
 
     public function checkActions() {
+
+        // NOTE TO SELF, A URI HAZ 22 chars. Can prob use explode().
+
         return $this->view->showPage();
     }
 }
