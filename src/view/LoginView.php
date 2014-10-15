@@ -2,6 +2,12 @@
 namespace view;
 
 class LoginView {
+    private $model;
+
+    public function __constructor(\model\UserModel $model)
+    {
+        $this->model = $model;
+    }
 
     // Checks if the user has pressed the login button.
     public function onClickLogin() {

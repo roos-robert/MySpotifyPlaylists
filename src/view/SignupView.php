@@ -6,7 +6,7 @@ class SignupView {
         return "
     <div class='container'>
         <h2>Become a member</h2>
-        <p>Register here here.</p>
+        <p>Register here.</p>
     </div>";
     }
 }
