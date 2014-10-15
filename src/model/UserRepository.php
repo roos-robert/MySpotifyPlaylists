@@ -36,7 +36,6 @@ class UserRepository extends Repository {
         $result = $query->fetch();
         if($result)
         {
-            //$this->user->setUser($result[self::$username], $result[self::$password], $result[self::$key]);
             return $result;
         }
         return NULL;
