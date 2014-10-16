@@ -9,6 +9,7 @@ class UserModel {
     private $userRepository;
     private $sessionLocation = "LoggedIn";
     private $sessionUsername = "Username";
+    private $sessionUserID = null;
 
     public function __construct() {
         $this->userRepository = new \model\UserRepository();
@@ -24,6 +25,7 @@ class UserModel {
             {
                 $_SESSION[$this->sessionLocation] = true;
                 $_SESSION[$this->sessionUsername] = $username;
+                $_SESSION[$this->sessionUserID] = $user["UserID"];
             }
         }
         else
@@ -65,6 +67,11 @@ class UserModel {
     // Function for retrieving the username of the user currently logged in.
     public function retriveUsername() {
         return $_SESSION[$this->sessionUsername];
+    }
+
+    // Function for retrieving the userID of the user currently logged in.
+    public function retriveUserID() {
+        return $_SESSION[$this->sessionUserID];
     }
 
     public function retriveToken($username) {

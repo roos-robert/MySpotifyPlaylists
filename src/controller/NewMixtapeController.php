@@ -4,11 +4,15 @@ namespace controller;
 
 require_once("src/view/NewMixtapeView.php");
 require_once("src/view/MessageView.php");
+require_once("src/model/MixtapeRepository.php");
+require_once("src/model/UserModel.php");
 
 class NewMixtapeController {
 
     private $view;
     private $messages;
+    private $model;
+    private $mixtapeRepository;
 
     public function getPostedMixtapeName() {
         return $_POST["mixtapeName"];;
@@ -21,6 +25,8 @@ class NewMixtapeController {
     public function __construct() {
         $this->view = new \view\NewMixtapeView();
         $this->messages = new \view\MessageView();
+        $this->model = new \model\UserModel();
+        $this->mixtapeRepository = new \model\MixtapeRepository();
     }
 
     public function checkActions() {
@@ -44,12 +50,27 @@ class NewMixtapeController {
                 // Saving the mixtape to the database.
                 try
                 {
+                    $mixtapeID = $this->mixtapeRepository->addMixtape($this->model->retriveUserID(), $this->getPostedMixtapeName(), $mixtapeImagePath);
 
+                    $mixtapeLinksValidated = array();
+
+                    // Splits the values at "newline" and throws them into a array
+                    $mixtapeLinks = explode("\n", $this->getPostedMixtapeLinks());
+                    // Arrays whos indexes contains nothing are removed
+                    $emptyRemoved = array_diff($mixtapeLinks, array(''));
+
+                    // Trimming away unwanted whitespaces from the links (if they exist)
+                    foreach ($emptyRemoved as $mixtapeLink) {
+                        array_push($mixtapeLinksValidated, trim($mixtapeLink));
+                    }
+
+                    $this->mixtapeRepository->addMixtapeRow($mixtapeID, $mixtapeLinksValidated);
                 }
                 catch (\Exception $e)
                 {
-
+                    $this->messages->save("Mixtape could not be saved, our database is a bit wonky at the moment!");
                 }
+
 
                 return $this->view->showMixtapeAdded();
             }

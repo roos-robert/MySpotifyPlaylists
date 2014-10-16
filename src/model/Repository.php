@@ -7,6 +7,7 @@ require_once("./Settings.php");
 abstract class Repository {
     protected $dbConnection;
     protected $dbTable;
+    protected $dbTableSecondary;
 
     protected function connection() {
 

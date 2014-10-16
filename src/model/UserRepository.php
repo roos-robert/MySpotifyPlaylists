@@ -11,11 +11,9 @@ class UserRepository extends Repository {
     private static $password = "Password";
     private static $key = "LoginToken";
     private static $email = "Email";
-    private $user;
 
     public function __construct() {
         $this->dbTable = "user";
-       //$this->user = $user;
     }
 
     public function add($username, $password, $email) {
