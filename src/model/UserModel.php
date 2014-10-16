@@ -3,9 +3,9 @@
 namespace model;
 
 require_once("src/model/UserRepository.php");
+require_once("src/view/CookieStorageView.php");
 
 class UserModel {
-
     private $userRepository;
     private $sessionLocation = "LoggedIn";
     private $sessionUsername = "Username";
@@ -36,7 +36,7 @@ class UserModel {
 
     // Automatic login.
     public function doAutoLogin($username, $token) {
-        if ($username == "Admin" && $this->retriveToken($username) == $token)
+        if ($username == $_COOKIE['username'] && $this->retriveToken($username) == $token)
         {
             $_SESSION[$this->sessionLocation] = true;
             $_SESSION[$this->sessionUsername] = $username;
