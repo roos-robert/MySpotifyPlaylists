@@ -97,13 +97,17 @@ class NewMixtapeView {
                 array_push($mixtapeLinksValidated, trim($mixtapeLink));
             }
 
+
+
             // Validates that the mixtape links truly are Spotify URI links (these are always 36 chars)
             foreach ($mixtapeLinksValidated as $mixtapeLink)
             {
+
+
                 if(strlen($mixtapeLink) != 36)
                 {
                     $this->messages->save("Mixtape contains non-Spotify URI links");
-                    return $this->showPage();
+                    return false;
                 }
             }
         }
