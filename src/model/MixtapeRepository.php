@@ -37,11 +37,12 @@ class MixtapeRepository extends Repository {
     public function addMixtapeRow($mixtapeID, $songs) {
 
 
+        $db = $this->connection();
+        $sql = "INSERT INTO $this->dbTableSecondary(" . self::$mixtapeID . ", " . self::$song . ") VALUES (?, ?)";
+
 
         foreach ($songs as $song)
         {
-            $db = $this->connection();
-            $sql = "INSERT INTO $this->dbTable(" . self::$mixtapeID . ", " . self::$song . ") VALUES (?, ?)";
             $params = array($mixtapeID, $song);
             $query = $db->prepare($sql);
             $query->execute($params);

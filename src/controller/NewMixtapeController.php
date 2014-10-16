@@ -45,6 +45,7 @@ class NewMixtapeController {
                 catch (\Exception $e)
                 {
                     $this->messages->save("Image could not be saved, is it meeting the requirements?");
+                    return $this->view->showPage();
                 }
 
                 // Saving the mixtape to the database.
@@ -64,11 +65,14 @@ class NewMixtapeController {
                         array_push($mixtapeLinksValidated, trim($mixtapeLink));
                     }
 
+
+
                     $this->mixtapeRepository->addMixtapeRow($mixtapeID, $mixtapeLinksValidated);
                 }
                 catch (\Exception $e)
                 {
                     $this->messages->save("Mixtape could not be saved, our database is a bit wonky at the moment!");
+                    return $this->view->showPage();
                 }
 
 

@@ -46,7 +46,7 @@ class HomeView {
                     <div class='container'>
                         <p>" . $this->messages->load() . "</p>
                         <h2>Welcome " . $this->model->retriveUsername() . "!</h2>
-                        <p>Nice day for a new mixtape right? <a href=''>Create</a> a new one right now!</p>
+                        <p>Nice day for a new mixtape right? <a href='?action=newMixtape'>Create</a> a new one right now!</p>
                         <h3>Listen to mixtapes</h3>
                         <p>Or why not look at some other mixtapes submitted by our growing community? Check them out right
                          <a href=''>here</a>!</p>

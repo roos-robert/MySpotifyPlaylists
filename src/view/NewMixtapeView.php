@@ -38,7 +38,21 @@ class NewMixtapeView {
 
         $target_dir = "src/gfx/playlistImages/";
         $target_dir = $target_dir . time() . "-" . basename( $_FILES["image"]["name"]);
-        $uploadOk=1;
+        $uploadOk = 1;
+
+        // File size is set to max 200kb.
+        if($_FILES["image"]["size"] > 212000)
+        {
+            $uploadOk = 0;
+        }
+        else
+        {
+            // Checks that the file beeing uploaded truly is a .gif/.jpg/.png picture.
+            $imageData = @getimagesize($_FILES["image"]["tmp_name"]);
+            if($imageData === FALSE || !($imageData[2] == IMAGETYPE_GIF || $imageData[2] == IMAGETYPE_JPEG || $imageData[2] == IMAGETYPE_PNG)) {
+                $uploadOk = 0;
+            }
+        }
 
         if($uploadOk != 1)
         {
@@ -57,6 +71,7 @@ class NewMixtapeView {
         }
     }
 
+    // Validates the input for the mixtape that is to be added.
     public function validateMixtape() {
         if ($this->getPostedMixtapeName() == "")
         {
@@ -119,7 +134,7 @@ class NewMixtapeView {
                 <input type='text' name='mixtapeName' class='form-control' value='$mixtapeName' /><br />
                 <label><strong>Mixtape songs: </strong></label>
                 <textarea class='form-control' rows='20' name='mixtapeLinks'></textarea><br />
-                <label><strong>Choose a mixtape image: </strong></label>
+                <label><strong>Choose a mixtape image (max 200kb): </strong></label>
                 <input type='file' name='image'><br />
                 <input type='submit' value='Create mixtape' name='createMixtapeButton' class='btn btn-default' />
                 </fieldset>
