@@ -23,8 +23,6 @@ class MyMixtapesView {
         {
             $mixtapes = $this->mixtapeRepository->getAllMixtapesForUser($this->userModel->retriveUserID());
 
-            //var_dump($mixtapes);
-
             $content = "<div class='container'>
                             <h1>Showing your mixtapes</h1>";
 

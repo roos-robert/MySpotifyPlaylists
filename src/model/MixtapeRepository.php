@@ -3,6 +3,7 @@
 namespace model;
 
 require_once("./src/model/Repository.php");
+require_once("./src/model/MixtapeModel.php");
 
 class MixtapeRepository extends Repository {
 
@@ -45,16 +46,16 @@ class MixtapeRepository extends Repository {
         }
     }
 
-    public function getSingleMixtape($mixtapeID) {
+    public function getSingleMixtape(MixtapeModel $mixtape) {
         $db = $this->connection();
         $sql = "SELECT * FROM $this->dbTable WHERE " . self::$mixtapeID . " = ?";
-        $params = array($mixtapeID);
+        $params = array($mixtape->getMixtapeID());
         $query = $db->prepare($sql);
         $query->execute($params);
         $result = $query->fetch();
         if($result)
         {
-            return $result;
+            return new \model\MixtapeModel($result[self::$userID], $result[self::$name], $result[self::$picture]);
         }
         return NULL;
     }
@@ -81,7 +82,7 @@ class MixtapeRepository extends Repository {
         $result = $query->fetch();
         if($result)
         {
-            return $result;
+            return new \model\MixtapeModel($result[self::$userID], $result[self::$name], $result[self::$picture]);
         }
         return NULL;
     }
