@@ -23,10 +23,10 @@ class MixtapeRepository extends Repository {
     }
 
     // Adds a new mixtape to the database. Param $picture is a string for pic-path.
-    public function addMixtape($userID, $name, $picture) {
+    public function addMixtape(MixtapeModel $mixtape) {
         $db = $this->connection();
         $sql = "INSERT INTO $this->dbTable(" . self::$userID . ", " . self::$name . ", " . self::$picture . ") VALUES (?, ?, ?)";
-        $params = array($userID, $name, $picture);
+        $params = array($mixtape->getUserID(), $mixtape->getName(), $mixtape->getPicture());
         $query = $db->prepare($sql);
         $query->execute($params);
 

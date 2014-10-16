@@ -8,8 +8,7 @@ class MixtapeModel {
     private $name;
     private $picture;
 
-    public function __construct($mixtapeID, $userID, $name, $picture) {
-        $this->mixtapeID = $mixtapeID;
+    public function __construct($userID, $name, $picture) {
         $this->userID = $userID;
         $this->name = $name;
         $this->picture = $picture;
@@ -25,5 +24,13 @@ class MixtapeModel {
 
     public function getUserID() {
         return $this->userID;
+    }
+
+    public function getPicture() {
+        return $this->picture;
+    }
+
+    public function setMixtapeID($mixtapeID) {
+        $this->mixtapeID = $mixtapeID;
     }
 }

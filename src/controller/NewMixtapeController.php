@@ -6,12 +6,14 @@ require_once("src/view/NewMixtapeView.php");
 require_once("src/view/MessageView.php");
 require_once("src/model/MixtapeRepository.php");
 require_once("src/model/UserModel.php");
+require_once("src/model/MixtapeModel.php");
 
 class NewMixtapeController {
 
     private $view;
     private $messages;
-    private $model;
+    private $userModel;
+    private $mixtapeModel;
     private $mixtapeRepository;
 
     public function getPostedMixtapeName() {
@@ -25,7 +27,7 @@ class NewMixtapeController {
     public function __construct() {
         $this->view = new \view\NewMixtapeView();
         $this->messages = new \view\MessageView();
-        $this->model = new \model\UserModel();
+        $this->userModel = new \model\UserModel();
         $this->mixtapeRepository = new \model\MixtapeRepository();
     }
 
@@ -51,7 +53,8 @@ class NewMixtapeController {
                 // Saving the mixtape to the database.
                 try
                 {
-                    $mixtapeID = $this->mixtapeRepository->addMixtape($this->model->retriveUserID(), $this->getPostedMixtapeName(), $mixtapeImagePath);
+                    $this->mixtapeModel = new \model\MixtapeModel($this->userModel->retriveUserID(), $this->getPostedMixtapeName(), $mixtapeImagePath);
+                    $mixtapeID = $this->mixtapeRepository->addMixtape($this->mixtapeModel);
 
                     $mixtapeLinksValidated = array();
 
