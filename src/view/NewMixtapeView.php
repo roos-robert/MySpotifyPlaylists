@@ -37,7 +37,8 @@ class NewMixtapeView {
         */
 
         $target_dir = "src/gfx/playlistImages/";
-        $target_dir = $target_dir . time() . "-" . basename( $_FILES["image"]["name"]);
+        $randomName = time() . "-" . basename( $_FILES["image"]["name"]);
+        $target_dir = $target_dir . $randomName;
         $uploadOk = 1;
 
         // File size is set to max 200kb.
@@ -62,7 +63,7 @@ class NewMixtapeView {
         {
             if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_dir))
             {
-                return basename( $_FILES["image"]["name"]);
+                return basename($randomName);
             }
             else
             {
@@ -96,8 +97,6 @@ class NewMixtapeView {
             foreach ($emptyRemoved as $mixtapeLink) {
                 array_push($mixtapeLinksValidated, trim($mixtapeLink));
             }
-
-
 
             // Validates that the mixtape links truly are Spotify URI links (these are always 36 chars)
             foreach ($mixtapeLinksValidated as $mixtapeLink)

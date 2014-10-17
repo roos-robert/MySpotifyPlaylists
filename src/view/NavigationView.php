@@ -8,6 +8,7 @@ class NavigationView {
     public static $actionLogin = 'login';
     public static $actionSignup = 'signup';
     public static $actionNewMixtape = 'newMixtape';
+    public static $actionMyMixtape = 'mixtape';
     public static $actionMyMixtapes = 'myMixtapes';
     public static $home = 'home';
 

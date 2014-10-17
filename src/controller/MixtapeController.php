@@ -2,7 +2,7 @@
 
 namespace controller;
 
-require_once("src/view/MyMixtapesView.php");
+require_once("src/view/MixtapeView.php");
 require_once("src/view/MessageView.php");
 
 class MyMixtapeController {
@@ -12,7 +12,7 @@ class MyMixtapeController {
 
     // Constructor, connects all the layers
     public function __construct() {
-        $this->view = new \view\MyMixtapeView();
+        $this->view = new \view\MixtapeView();
         $this->messages = new \view\MessageView();
     }
 

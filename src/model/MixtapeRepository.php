@@ -11,6 +11,7 @@ class MixtapeRepository extends Repository {
     private static $userID = "UserID";
     private static $name = "Name";
     private static $picture = "Picture";
+    private static $creationDate = "DateCreated";
     private $lastInsertedID;
 
     // MixtapeRow-table fields
@@ -55,7 +56,7 @@ class MixtapeRepository extends Repository {
         $result = $query->fetch();
         if($result)
         {
-            return new \model\MixtapeModel($result[self::$userID], $result[self::$name], $result[self::$picture], $result[self::$mixtapeID]);
+            return new \model\MixtapeModel($result[self::$userID], $result[self::$name], $result[self::$picture], $result[self::$mixtapeID], $result[self::$creationDate]);
         }
         return NULL;
     }

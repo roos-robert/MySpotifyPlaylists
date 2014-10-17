@@ -7,12 +7,14 @@ class MixtapeModel {
     private $userID;
     private $name;
     private $picture;
+    private $creationDate;
 
-    public function __construct($userID, $name, $picture, $mixtapeID = NULL) {
+    public function __construct($userID, $name, $picture, $mixtapeID = NULL, $creationDate = NULL) {
         $this->userID = $userID;
         $this->name = $name;
         $this->picture = $picture;
         $this->mixtapeID = $mixtapeID ? $mixtapeID : NULL;
+        $this->creationDate = $creationDate ? $creationDate : NULL;
     }
 
     public function getName() {
@@ -29,6 +31,10 @@ class MixtapeModel {
 
     public function getPicture() {
         return $this->picture;
+    }
+
+    public function getCreationDate() {
+        return $this->creationDate;
     }
 
     public function setMixtapeID($mixtapeID) {
