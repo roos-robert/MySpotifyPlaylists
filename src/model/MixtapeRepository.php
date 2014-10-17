@@ -46,16 +46,16 @@ class MixtapeRepository extends Repository {
         }
     }
 
-    public function getSingleMixtape(MixtapeModel $mixtape) {
+    public function getSingleMixtape($mixtapeID) {
         $db = $this->connection();
         $sql = "SELECT * FROM $this->dbTable WHERE " . self::$mixtapeID . " = ?";
-        $params = array($mixtape->getMixtapeID());
+        $params = array($mixtapeID);
         $query = $db->prepare($sql);
         $query->execute($params);
         $result = $query->fetch();
         if($result)
         {
-            return new \model\MixtapeModel($result[self::$userID], $result[self::$name], $result[self::$picture]);
+            return new \model\MixtapeModel($result[self::$userID], $result[self::$name], $result[self::$picture], $result[self::$mixtapeID]);
         }
         return NULL;
     }

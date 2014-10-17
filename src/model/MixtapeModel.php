@@ -3,15 +3,16 @@
 namespace model;
 
 class MixtapeModel {
-    private $mixtapeID;
+    private $mixtapeID = NULL;
     private $userID;
     private $name;
     private $picture;
 
-    public function __construct($userID, $name, $picture) {
+    public function __construct($userID, $name, $picture, $mixtapeID = NULL) {
         $this->userID = $userID;
         $this->name = $name;
         $this->picture = $picture;
+        $this->mixtapeID = $mixtapeID ? $mixtapeID : NULL;
     }
 
     public function getName() {

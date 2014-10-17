@@ -21,11 +21,11 @@ class MyMixtapesView {
         }
         else
         {
-            $mixtapes = $this->mixtapeRepository->getAllMixtapesForUser($this->userModel->retriveUserID());
+            $mixtape = $this->mixtapeRepository->getSingleMixtape(25);
 
             $content = "<div class='container'>
                             <h1>Showing your mixtapes</h1>";
-
+            $content .= $mixtape->getName();
             $content .= "</div>";
 
                 return $content;
