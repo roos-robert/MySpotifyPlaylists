@@ -78,7 +78,12 @@ class SignupView {
             $this->messages->save($error);
             return false;
         }
-
+        if (!filter_var($this->getPostedEmail(), FILTER_VALIDATE_EMAIL))
+        {
+            $error .= " - Email is not in a valid format 'xxx@xxx.com' ";
+            $this->messages->save($error);
+            return false;
+        }
         if($username = $this->userRepository->get($this->getPostedUsername()) != NULL)
         {
             $error .= " - Username is already in use ";
