@@ -22,7 +22,6 @@ class MixtapesController {
     }
 
     public function checkActions() {
-
         return $this->view->showPage($this->mixtapeRepository->getAllMixtapes());
     }
 }

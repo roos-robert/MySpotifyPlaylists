@@ -1,6 +1,8 @@
 <?php
 namespace view;
 
+use model\MixtapeModel;
+
 class NewMixtapeView {
 
     private $messages;
@@ -29,10 +31,22 @@ class NewMixtapeView {
         }
     }
 
+    // Checks if the user has pressed a button for updating a mixtape
+    public function mixtapeUpdateChosen() {
+        if (isset($_GET["update"]))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     // Handles the upload of a image for the mixtape
     public function uploadMixtapeImage() {
         /*
-           NOTE FOR EXAMINATORS! This code is based on the examples from W3 Schools PHP Upload!
+           NOTE FOR EXAMINATORS! This code (row 51-54) is based on the examples from W3 Schools PHP Upload!
            http://www.w3schools.com/php/php_file_upload.asp
         */
 
@@ -101,8 +115,6 @@ class NewMixtapeView {
             // Validates that the mixtape links truly are Spotify URI links (these are always 36 chars)
             foreach ($mixtapeLinksValidated as $mixtapeLink)
             {
-
-
                 if(strlen($mixtapeLink) != 36)
                 {
                     $this->messages->save("Mixtape contains non-Spotify URI links");
@@ -114,11 +126,41 @@ class NewMixtapeView {
         return true;
     }
 
+    // This is shown instead of showPage after a mixtape has successfully been added.
     public function showMixtapeAdded() {
         return "
         <div class='container'>
             <h1>Success!</h1>
              <p>The mixtape has been added, you can now find it under the section 'My Mixtapes'!</p>
+        </div>";
+    }
+
+    public function showPageUpdateMixtape(MixtapeModel $mixtape) {
+        $mixtapeName = isset($_POST["mixtapeName"]) ? $_POST["mixtapeName"] : "";
+        return "
+        <div class='jumbotron'>
+                  <div class='container'>
+                    <img src='src/gfx/Logo.png' width='500' height='200' alt='Mixtapeify' />
+                  </div>
+                </div>
+        <div class='container'>
+            <h1>Update the mixtape </h1>
+            <p>Updating a new mixtape is easy! Just give your mixtape a name, then highlight your songs of choice from spotify and choose copy URI, then paste it in the
+            textarea down below. Check out <a href='?action=home&about=show'>this guide</a> if you are uncertain of how things work!</p>
+            <p>&nbsp;</p>
+
+             <form action='' method='post' name='newMixtapeForm' enctype='multipart/form-data'>
+                <fieldset>
+                <legend>Create your mixtape</legend><p style='color: red;'>" . $this->messages->load() . "</p>
+                <label><strong>Mixtape name: </strong></label>
+                <input type='text' name='mixtapeName' class='form-control' value='$mixtapeName' /><br />
+                <label><strong>Mixtape songs: </strong></label>
+                <textarea class='form-control' rows='20' name='mixtapeLinks'></textarea><br />
+                <label><strong>Choose a mixtape image (max 200kb): </strong></label>
+                <input type='file' name='image'><br />
+                <input type='submit' value='Create mixtape' name='createMixtapeButton' class='btn btn-default' />
+                </fieldset>
+            </form>
         </div>";
     }
 

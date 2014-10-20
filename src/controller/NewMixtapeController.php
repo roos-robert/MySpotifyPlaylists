@@ -68,8 +68,6 @@ class NewMixtapeController {
                         array_push($mixtapeLinksValidated, trim($mixtapeLink));
                     }
 
-
-
                     $this->mixtapeRepository->addMixtapeRow($mixtapeID, $mixtapeLinksValidated);
                 }
                 catch (\Exception $e)
@@ -78,9 +76,12 @@ class NewMixtapeController {
                     return $this->view->showPage();
                 }
 
-
                 return $this->view->showMixtapeAdded();
             }
+        }
+        elseif($this->view->mixtapeUpdateChosen())
+        {
+            return $this->view->showPageUpdateMixtape();
         }
 
         return $this->view->showPage();
