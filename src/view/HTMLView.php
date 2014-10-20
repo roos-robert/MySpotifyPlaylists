@@ -46,7 +46,8 @@ class HTMLView {
           if ($this->model->getLoginStatus() == false)
           {
             echo "<li><a href='?action=login'>Login</a></li>
-                  <li><a href='?action=signup'>Register</a></li>";
+                  <li><a href='?action=signup'>Register</a></li>
+                  <li><a href='?action=home&about=show'>About</a></li>";
           }
           else
           {
@@ -54,6 +55,7 @@ class HTMLView {
               <li><a href='?action=allMixtapes'>Browse mixtapes</a></li>
               <li><a href='?action=newMixtape'>New mixtape</a></li>
               <li><a href='?action=myMixtapes'>My mixtapes</a></li>
+              <li><a href='?action=home&about=show'>About</a></li>
               <li><a href='?action=login&logout=true'>Logout</a></li>";
           }
              echo "

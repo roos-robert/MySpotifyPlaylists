@@ -29,3 +29,7 @@ body {
 .img {
     width: 100%;
 }
+
+.jumbotron {
+    padding: 0;
+}

@@ -21,7 +21,13 @@ class MixtapesView {
         }
         else
         {
-            $content = "<div class='container'>
+            $content = "
+                <div class='jumbotron'>
+                  <div class='container'>
+                    <img src='src/gfx/Logo.png' width='500' height='200' alt='Mixtapeify' />
+                  </div>
+                </div>
+                <div class='container'>
                             <h1>Browsing all mixtapes</h1>
                             <p>&nbsp;</p>
 

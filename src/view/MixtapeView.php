@@ -59,7 +59,12 @@ class MixtapeView {
 
             if($mixtape != NULL)
             {
-                $content = "<div class='container'>";
+                $content = "<div class='jumbotron'>
+                  <div class='container'>
+                    <img src='src/gfx/Logo.png' width='500' height='200' alt='Mixtapeify' />
+                  </div>
+                </div>
+                <div class='container'>";
                 $content .= "<h1>Mixtape: " . $mixtape->getName() . "</h1>"  . $this->messages->load() . "
             <p>" . $mixtape->getCreationDate() . "</p><p></p>
             <img src='src/gfx/playlistImages/" . $mixtape->getPicture() . "' width='250' />
@@ -86,7 +91,12 @@ class MixtapeView {
             }
             else
             {
-                return "<div class='container'>
+                return "<div class='jumbotron'>
+                  <div class='container'>
+                    <img src='src/gfx/Logo.png' width='500' height='200' alt='Mixtapeify' />
+                  </div>
+                </div>
+                <div class='container'>
                 <h1>Not found</h1>
                 <p>No mixtape with that ID was found</p>
                 </div>";

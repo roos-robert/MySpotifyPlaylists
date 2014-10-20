@@ -13,6 +13,17 @@ class HomeView {
         $this->messages = new \view\MessageView();
     }
 
+    public function aboutChosen() {
+        if (isset($_GET["about"]))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public function showPage() {
         if($this->model->getLoginStatus() === false)
         {

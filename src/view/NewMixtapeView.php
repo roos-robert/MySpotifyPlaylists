@@ -124,7 +124,13 @@ class NewMixtapeView {
 
     public function showPage() {
         $mixtapeName = isset($_POST["mixtapeName"]) ? $_POST["mixtapeName"] : "";
-        return "<div class='container'>
+        return "
+        <div class='jumbotron'>
+                  <div class='container'>
+                    <img src='src/gfx/Logo.png' width='500' height='200' alt='Mixtapeify' />
+                  </div>
+                </div>
+        <div class='container'>
             <h1>Create a new mixtape</h1>
             <p>Creating a new mixtape is easy! Just give your mixtape a name, then highlight your songs of choice from spotify and choose copy URI, then paste it in the
             textarea down below. Check out <a href=''>this guide</a> if you are uncertain of how things work!</p>
