@@ -17,15 +17,15 @@ class MixtapeView {
     public function mixtapeChosen() {
         if (isset($_GET["mixtapeID"]))
         {
-            return true;
+            return $_GET["mixtapeID"];
         }
         else
         {
-            return false;
+            return NULL;
         }
     }
 
-    public function showPage() {
+    public function showPage($mixtape) {
         if($this->userModel->getLoginStatus() === false || !$this->mixtapeChosen())
         {
             header('Location: index.php');
@@ -33,8 +33,6 @@ class MixtapeView {
         }
         else
         {
-            $mixtape = $this->mixtapeRepository->getSingleMixtape($_GET["mixtapeID"]);
-
             if($mixtape != NULL)
             {
                 $content = "<div class='container'>";
@@ -42,8 +40,16 @@ class MixtapeView {
             <p>" . $mixtape->getCreationDate() . "</p><p></p>
             <img src='src/gfx/playlistImages/" . $mixtape->getPicture() . "' width='250' />
             <h3>Songs</h3>";
-                $content .= "</div>";
 
+
+                /* Dummy code right now, will use this in a foreach with the mixtape-songs to retrieve the Spotify Data
+                $string = file_get_contents("http://ws.spotify.com/lookup/1/.json?uri=spotify:track:6NmXV4o6bmp704aPGyTVVG");
+                $res = json_decode($string, true);
+                var_dump($res["track"]["album"]["name"]);
+                */
+
+
+                $content .= "</div>";
                 return $content;
             }
             else
@@ -53,7 +59,6 @@ class MixtapeView {
                 <p>No mixtape with that ID was found</p>
                 </div>";
             }
-
         }
     }
 }

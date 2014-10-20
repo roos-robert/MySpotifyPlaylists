@@ -14,10 +14,10 @@ class LoginController {
     private $autoLogin;
 
     public function getPostedUsername() {
-        return $_POST["username"];;
+        return $_POST["username"];
     }
     public function getPostedPassword() {
-        return $_POST["password"];;
+        return $_POST["password"];
     }
 
     // Constructor, connects all the layers
@@ -39,19 +39,19 @@ class LoginController {
                 {
                     // Checks the username and password in the model, to see that it exists.
                     $this->model->doAutoLogin($_COOKIE[$this->autoLogin->getCookieUsername()], $_COOKIE[$this->autoLogin->getCookieToken()]);
-                    $this->messages->save("Inloggning lyckades via cookies");
+                    $this->messages->save("Auto-login with cookie succeeded!");
                     header('Location: index.php');
                     exit;
                 }
                 catch (\Exception $e)
                 {
-                    $this->messages->save("Felaktig information i cookie");
+                    $this->messages->save("Wrong information in cookie");
                     $this->autoLogin->autoLoginCookieRemove();
                 }
             }
             else
             {
-                $this->messages->save("Felaktig information i cookie");
+                $this->messages->save("Wrong information in cookie");
                 $this->autoLogin->autoLoginCookieRemove();
             }
         }
@@ -80,12 +80,10 @@ class LoginController {
                         $this->messages->save("You have been logged in, we will remember you next time!");
                         header('Location: index.php');
                         exit;
-                        //return $this->view->showPage();
                     }
                     $this->messages->save("You have been logged in!");
                     header('Location: index.php');
                     exit;
-                    //return $this->view->showPage();
                 }
                 catch (\Exception $e)
                 {

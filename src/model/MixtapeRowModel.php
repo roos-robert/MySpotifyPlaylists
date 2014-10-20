@@ -6,11 +6,17 @@ class MixtapeRowModel {
     private $mixtapeRowID;
     private $mixtapeID;
     private $song;
-    private $picture;
 
     public function __construct($mixtapeID, $song) {
         $this->mixtapeID = $mixtapeID;
         $this->song = $song;
+    }
+
+    public function equals(MixtapeRowModel $other) {
+        return (
+            $this->getSong() == $other->getSong() &&
+            $this->getMixtapeRowID() == $this->getMixtapeRowID()
+        );
     }
 
     public function getSong() {
