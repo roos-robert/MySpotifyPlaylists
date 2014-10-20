@@ -108,4 +108,18 @@ class MixtapeRepository extends Repository {
 
         return $mixtapeList;
     }
+
+    public function removeMixtape($mixtapeID) {
+        $db = $this -> connection();
+        $sql = "DELETE FROM $this->dbTable WHERE " . self::$mixtapeID . " = ?";
+        $params = array($mixtapeID);
+        $query = $db -> prepare($sql);
+        $query -> execute($params);
+
+        $db = $this -> connection();
+        $sql = "DELETE FROM $this->dbTableSecondary WHERE " . self::$mixtapeID . " = ?";
+        $params = array($mixtapeID);
+        $query = $db -> prepare($sql);
+        $query -> execute($params);
+    }
 }

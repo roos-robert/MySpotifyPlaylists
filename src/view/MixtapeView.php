@@ -25,18 +25,31 @@ class MixtapeView {
         }
     }
 
-    public function showPage($mixtape, $mixtapeRows) {
-        if($this->userModel->getLoginStatus() === false || !$this->mixtapeChosen())
+    public function mixtapeRemoveChosen() {
+        if (isset($_GET["remove"]))
         {
-            header('Location: index.php');
-            exit;
+            return true;
         }
         else
         {
+            return false;
+        }
+    }
+
+    public function mixtapeRemoved() {
+        return "<div class='container'>
+                <h1>Mixtape removed</h1>
+                <p>The mixtape was successfully removed!</p>
+                <p>Use the main menu to see your other mixtapes, or why not create a new one?</p>
+                </div>";
+    }
+
+    public function showPage($mixtape, $mixtapeRows) {
+
             if($mixtape != NULL)
             {
                 $content = "<div class='container'>";
-                $content .= "<h1>Mixtape: " . $mixtape->getName() . "</h1>
+                $content .= "<h1>Mixtape: " . $mixtape->getName() . "</h1>"  . $this->messages->load() . "
             <p>" . $mixtape->getCreationDate() . "</p><p></p>
             <img src='src/gfx/playlistImages/" . $mixtape->getPicture() . "' width='250' />
             <h3>Songs</h3>";
@@ -54,7 +67,8 @@ class MixtapeView {
                     $content .= " - " .  $res["track"]["name"] . "</div></div><p>&nbsp;</p>";
                 };
 
-                $content .= "</div>";
+                $content .= "<h3>Handle mixtape</h3>
+                                <a href='?action=mixtape&remove=true&mixtapeID=" . $mixtape->getMixtapeID() . "'>Remove mixtape</a></div>";
                 return $content;
             }
             else
@@ -64,6 +78,6 @@ class MixtapeView {
                 <p>No mixtape with that ID was found</p>
                 </div>";
             }
-        }
+
     }
 }

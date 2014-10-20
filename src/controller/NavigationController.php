@@ -37,8 +37,8 @@ class NavigationController {
                     $this->controller = new NewMixtapeController();
                     return $this->controller->checkActions();
                     break;
-                case \view\NavigationView::$actionMyMixtape:
-                    $this->controller = new MyMixtapeController();
+                case \view\NavigationView::$actionMixtape:
+                    $this->controller = new MixtapeController();
                     return $this->controller->checkActions();
                     break;
                 case \view\NavigationView::$actionMyMixtapes:
