@@ -4,9 +4,9 @@ namespace model;
 
 require_once("./src/model/Repository.php");
 require_once("./src/model/MixtapeModel.php");
+require_once("./src/model/MixtapeList.php");
 
 class MixtapeRepository extends Repository {
-
     // Mixtape-table fields, note that the auto-timestamp field CreationDate is not listed here, but exists in DB.
     private static $userID = "UserID";
     private static $name = "Name";
@@ -66,12 +66,14 @@ class MixtapeRepository extends Repository {
         $sql = "SELECT * FROM $this->dbTable";
         $query = $db->prepare($sql);
         $query->execute();
-        $result = $query->fetch();
-        if($result)
-        {
-            return $result;
+
+        $mixtapeList = new \model\MixtapeList();
+
+        foreach ($query->fetchAll() as $result) {
+            $mixtapeList -> add(new \model\MixtapeModel($result[self::$userID], $result[self::$name], $result[self::$picture], $result[self::$mixtapeID], $result[self::$creationDate]));
         }
-        return NULL;
+
+        return $mixtapeList;
     }
 
     public function getAllMixtapesForUser($userID) {
@@ -80,11 +82,12 @@ class MixtapeRepository extends Repository {
         $params = array($userID);
         $query = $db->prepare($sql);
         $query->execute($params);
-        $result = $query->fetch();
-        if($result)
-        {
-            return new \model\MixtapeModel($result[self::$userID], $result[self::$name], $result[self::$picture]);
+        $mixtapeList = new \model\MixtapeList();
+
+        foreach ($query->fetchAll() as $result) {
+            $mixtapeList -> add(new \model\MixtapeModel($result[self::$userID], $result[self::$name], $result[self::$picture], $result[self::$mixtapeID], $result[self::$creationDate]));
         }
-        return NULL;
+
+        return $mixtapeList;
     }
 }

@@ -17,6 +17,13 @@ class MixtapeModel {
         $this->creationDate = $creationDate ? $creationDate : NULL;
     }
 
+    public function equals(MixtapeModel $other) {
+        return (
+            $this->getName() == $other->getName() &&
+            $this->getMixtapeID() == $this->getMixtapeID()
+        );
+    }
+
     public function getName() {
         return $this->name;
     }
