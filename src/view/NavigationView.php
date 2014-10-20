@@ -10,6 +10,7 @@ class NavigationView {
     public static $actionNewMixtape = 'newMixtape';
     public static $actionMixtape = 'mixtape';
     public static $actionMyMixtapes = 'myMixtapes';
+    public static $actionAllMixtapes = 'allMixtapes';
     public static $home = 'home';
 
     public static function getAction() {

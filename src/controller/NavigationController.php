@@ -45,6 +45,10 @@ class NavigationController {
                     $this->controller = new MyMixtapesController();
                     return $this->controller->checkActions();
                     break;
+                case \view\NavigationView::$actionAllMixtapes:
+                    $this->controller = new MyMixtapesController();
+                    return $this->controller->checkActions();
+                    break;
                 default:
                     $this->controller = new HomeController();
                     return $this->controller->checkActions();

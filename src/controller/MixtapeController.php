@@ -55,12 +55,9 @@ class MixtapeController {
                 return $this->view->showPage($this->mixtapeRepository->getSingleMixtape($_GET["mixtapeID"]), $this->mixtapeRepository->getAllMixtapeRows($_GET["mixtapeID"]));
             }
         }
-
-        $mixtapeChosen = $this->view->mixtapeChosen();
-
-        if($mixtapeChosen != NULL)
+        elseif($this->view->mixtapeChosen())
         {
-            return $this->view->showPage($this->mixtapeRepository->getSingleMixtape($mixtapeChosen), $this->mixtapeRepository->getAllMixtapeRows($mixtapeChosen));
+            return $this->view->showPage($this->mixtapeRepository->getSingleMixtape($_GET["mixtapeID"]), $this->mixtapeRepository->getAllMixtapeRows($_GET["mixtapeID"]));
         }
         else
         {

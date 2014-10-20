@@ -17,11 +17,11 @@ class MixtapeView {
     public function mixtapeChosen() {
         if (isset($_GET["mixtapeID"]))
         {
-            return $_GET["mixtapeID"];
+            return true;
         }
         else
         {
-            return NULL;
+            return false;
         }
     }
 
@@ -68,7 +68,7 @@ class MixtapeView {
                 };
 
                 $content .= "<h3>Handle mixtape</h3>
-                                <a href='?action=mixtape&remove=true&mixtapeID=" . $mixtape->getMixtapeID() . "'>Remove mixtape</a></div>";
+                                <a href='?action=mixtape&remove=true&mixtapeID=" . $mixtape->getMixtapeID() . "' onclick=\"return confirm('Are you sure you want to remove this mixtape?')\">Remove mixtape</a></div>";
                 return $content;
             }
             else
