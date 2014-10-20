@@ -1,21 +1,19 @@
 <?php
 namespace view;
 
-use model\MixtapeRepository;
-
 class MyMixtapesView {
     private $userModel;
-    private $mixtapeRepository;
+
     private $messages;
 
     public function __construct()
     {
         $this->userModel = new \model\UserModel();
-        $this->mixtapeRepository = new \model\MixtapeRepository();
+
         $this->messages = new \view\MessageView();
     }
 
-    public function showPage() {
+    public function showPage(\model\MixtapeList $mixtapes) {
         if($this->userModel->getLoginStatus() === false)
         {
             header('Location: index.php');
@@ -23,7 +21,7 @@ class MyMixtapesView {
         }
         else
         {
-            $mixtapes = $this->mixtapeRepository->getAllMixtapesForUser($this->userModel->retriveUserID());
+            //$mixtapes = $this->mixtapeRepository->getAllMixtapesForUser($this->userModel->retriveUserID());
 
             $content = "<div class='container'>
                             <h1>Showing your mixtapes</h1>";

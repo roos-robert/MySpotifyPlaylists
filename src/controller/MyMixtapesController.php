@@ -8,6 +8,8 @@ require_once("src/model/MixtapeList.php");
 
 class MyMixtapesController {
 
+    private $userModel;
+    private $mixtapeRepository;
     private $view;
     private $messages;
 
@@ -15,10 +17,12 @@ class MyMixtapesController {
     public function __construct() {
         $this->view = new \view\MyMixtapesView();
         $this->messages = new \view\MessageView();
+        $this->mixtapeRepository = new \model\MixtapeRepository();
+        $this->userModel = new \model\UserModel();
     }
 
     public function checkActions() {
 
-        return $this->view->showPage();
+        return $this->view->showPage($this->mixtapeRepository->getAllMixtapesForUser($this->userModel->retriveUserID()));
     }
 }
