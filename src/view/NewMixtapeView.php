@@ -32,6 +32,18 @@ class NewMixtapeView {
         }
     }
 
+    // Checks if the user has pressed the updateMixtapeButton.
+    public function onClickUpdateMixtape() {
+        if(isset($_POST["updateMixtapeButton"]))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     // Checks if the user has pressed a button for updating a mixtape
     public function mixtapeUpdateChosen() {
         if (isset($_GET["update"]))
@@ -166,10 +178,11 @@ class NewMixtapeView {
                 <label><strong>Choose a new mixtape image (max 200kb, OPTIONAL!): </strong></label>
                 <p><img src='src/gfx/playlistImages/" . $mixtape->getPicture() . "' width='50' alt='Current mixtape image' title='Current mixtape image' /></p>
                 <input type='file' name='image'><br />
-                <input type='submit' value='Create mixtape' name='createMixtapeButton' class='btn btn-default' />
+                <input type='submit' value='Update mixtape' name='updateMixtapeButton' class='btn btn-default' />
                 </fieldset>
             </form>
-        </div>";
+        </div>
+        <p>&nbsp;</p>";
 
         return $content;
     }

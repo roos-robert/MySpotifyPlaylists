@@ -72,11 +72,16 @@ class MixtapeView {
                     $content .= " - " .  $res["track"]["name"] . "</div></div><p>&nbsp;</p>";
                 };
 
-                $content .= "<h3>Handle mixtape</h3>
+                // Only presents the update and remove buttons if the logged in user is the creator of the playlist.
+                if($this->userModel->retriveUserID() == $mixtape->getUserID())
+                {
+                    $content .= "<h3>Handle mixtape</h3>
                                 <a class='btn btn-default' href='?action=newMixtape&update=true&mixtapeID=" . $mixtape->getMixtapeID() . "'>Update mixtape</a>
                                 <a class='btn btn-danger' href='?action=mixtape&remove=true&mixtapeID=" . $mixtape->getMixtapeID() . "' onclick=\"return confirm('Are you sure you want to remove this mixtape?')\">Remove mixtape</a>
-                                <p>&nbsp;</p>
-                                </div>";
+                                <p>&nbsp;</p>";
+                }
+
+                $content .= "</div>";
                 return $content;
             }
             else
