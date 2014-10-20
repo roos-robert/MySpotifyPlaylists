@@ -36,6 +36,17 @@ class MixtapeView {
         }
     }
 
+    public function mixtapeUpdateChosen() {
+        if (isset($_GET["update"]))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public function mixtapeRemoved() {
         return "<div class='container'>
                 <h1>Mixtape removed</h1>
@@ -68,7 +79,9 @@ class MixtapeView {
                 };
 
                 $content .= "<h3>Handle mixtape</h3>
-                                <a href='?action=mixtape&remove=true&mixtapeID=" . $mixtape->getMixtapeID() . "' onclick=\"return confirm('Are you sure you want to remove this mixtape?')\">Remove mixtape</a></div>";
+                                <a class='btn btn-default' href='?action=mixtape&update=true&mixtapeID=" . $mixtape->getMixtapeID() . "'>Update mixtape</a>
+                                <a class='btn btn-danger' href='?action=mixtape&remove=true&mixtapeID=" . $mixtape->getMixtapeID() . "' onclick=\"return confirm('Are you sure you want to remove this mixtape?')\">Remove mixtape</a>
+                                </div>";
                 return $content;
             }
             else
