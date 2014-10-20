@@ -27,7 +27,9 @@ class AboutView {
                     <p>We are here to make sure that even if you by accident delete one of your playlists in the Spotify client
                     instantly can come here and look up the exact songs you had in that playlist, to build it up agan</p>
                     <h3>How do I use it?</h3>
-                    <p>It's simple!</p>
+                    <p>It's simple! Here is how you add a new mixtape to your collection.</p>
+                    <p><iframe width='640' height='360' src='//www.youtube.com/embed/Gd9W2Ukzi5g?rel=0' frameborder='0' allowfullscreen></iframe></p>
+                    <p>&nbsp;</p>
                 </div>";
     }
 }

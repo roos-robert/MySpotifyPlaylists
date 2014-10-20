@@ -86,6 +86,7 @@ class MixtapeView {
                 $content .= "<h3>Handle mixtape</h3>
                                 <a class='btn btn-default' href='?action=mixtape&update=true&mixtapeID=" . $mixtape->getMixtapeID() . "'>Update mixtape</a>
                                 <a class='btn btn-danger' href='?action=mixtape&remove=true&mixtapeID=" . $mixtape->getMixtapeID() . "' onclick=\"return confirm('Are you sure you want to remove this mixtape?')\">Remove mixtape</a>
+                                <p>&nbsp;</p>
                                 </div>";
                 return $content;
             }

@@ -133,7 +133,7 @@ class NewMixtapeView {
         <div class='container'>
             <h1>Create a new mixtape</h1>
             <p>Creating a new mixtape is easy! Just give your mixtape a name, then highlight your songs of choice from spotify and choose copy URI, then paste it in the
-            textarea down below. Check out <a href=''>this guide</a> if you are uncertain of how things work!</p>
+            textarea down below. Check out <a href='?action=home&about=show'>this guide</a> if you are uncertain of how things work!</p>
             <p>&nbsp;</p>
 
              <form action='' method='post' name='newMixtapeForm' enctype='multipart/form-data'>
