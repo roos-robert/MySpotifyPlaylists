@@ -17,10 +17,10 @@ class NewMixtapeController {
     private $mixtapeRepository;
 
     public function getPostedMixtapeName() {
-        return $_POST["mixtapeName"];;
+        return $_POST["mixtapeName"];
     }
     public function getPostedMixtapeLinks() {
-        return $_POST["mixtapeLinks"];;
+        return $_POST["mixtapeLinks"];
     }
 
     // Constructor, connects all the layers.
@@ -81,7 +81,7 @@ class NewMixtapeController {
         }
         elseif($this->view->mixtapeUpdateChosen())
         {
-            return $this->view->showPageUpdateMixtape();
+            return $this->view->showPageUpdateMixtape($this->mixtapeRepository->getSingleMixtape($_GET["mixtapeID"]));
         }
 
         return $this->view->showPage();
