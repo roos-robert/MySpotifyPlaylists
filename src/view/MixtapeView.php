@@ -25,7 +25,7 @@ class MixtapeView {
         }
     }
 
-    public function showPage($mixtape) {
+    public function showPage($mixtape, $mixtapeRows) {
         if($this->userModel->getLoginStatus() === false || !$this->mixtapeChosen())
         {
             header('Location: index.php');
@@ -41,13 +41,18 @@ class MixtapeView {
             <img src='src/gfx/playlistImages/" . $mixtape->getPicture() . "' width='250' />
             <h3>Songs</h3>";
 
+                foreach ($mixtapeRows->toArray() as $mixtapeRow) {
+                    $string = file_get_contents("http://ws.spotify.com/lookup/1/.json?uri=" . $mixtapeRow->getSong());
+                    $res = json_decode($string, true);
+                    $trackArtists = $res["track"]["artists"];
 
-                /* Dummy code right now, will use this in a foreach with the mixtape-songs to retrieve the Spotify Data
-                $string = file_get_contents("http://ws.spotify.com/lookup/1/.json?uri=spotify:track:6NmXV4o6bmp704aPGyTVVG");
-                $res = json_decode($string, true);
-                var_dump($res["track"]["album"]["name"]);
-                */
+                    $content .= "<div class='row'><div class='col-md-12'>";
+                    foreach ($trackArtists as $trackArtist) {
+                        $content .= "<strong>" . $trackArtist["name"] . ", </strong>";
+                    }
 
+                    $content .= " - " .  $res["track"]["name"] . "</div></div><p>&nbsp;</p>";
+                };
 
                 $content .= "</div>";
                 return $content;

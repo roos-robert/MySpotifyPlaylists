@@ -4,7 +4,9 @@ namespace model;
 
 require_once("./src/model/Repository.php");
 require_once("./src/model/MixtapeModel.php");
+require_once("./src/model/MixtapeRowModel.php");
 require_once("./src/model/MixtapeList.php");
+require_once("./src/model/MixtapeRowList.php");
 
 class MixtapeRepository extends Repository {
     // Mixtape-table fields, note that the auto-timestamp field CreationDate is not listed here, but exists in DB.
@@ -74,6 +76,21 @@ class MixtapeRepository extends Repository {
         }
 
         return $mixtapeList;
+    }
+
+    public function getAllMixtapeRows($mixtapeID) {
+        $db = $this->connection();
+        $sql = "SELECT * FROM $this->dbTableSecondary WHERE " . self::$mixtapeID . " = ?";
+        $params = array($mixtapeID);
+        $query = $db->prepare($sql);
+        $query->execute($params);
+        $mixtapeRowList = new \model\MixtapeRowList();
+
+        foreach ($query->fetchAll() as $result) {
+            $mixtapeRowList -> add(new \model\MixtapeRowModel($result[self::$mixtapeID], $result[self::$song]));
+        }
+
+        return $mixtapeRowList;
     }
 
     public function getAllMixtapesForUser($userID) {

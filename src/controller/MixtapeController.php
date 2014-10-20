@@ -22,9 +22,12 @@ class MyMixtapeController {
     }
 
     public function checkActions() {
-        if($this->view->mixtapeChosen() != NULL)
+
+        $mixtapeChosen = $this->view->mixtapeChosen();
+
+        if($mixtapeChosen != NULL)
         {
-            return $this->view->showPage($this->mixtapeRepository->getSingleMixtape($this->view->mixtapeChosen()));
+            return $this->view->showPage($this->mixtapeRepository->getSingleMixtape($mixtapeChosen), $this->mixtapeRepository->getAllMixtapeRows($mixtapeChosen));
         }
         else
         {
