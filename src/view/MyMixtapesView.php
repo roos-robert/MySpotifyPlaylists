@@ -21,15 +21,17 @@ class MyMixtapesView {
         }
         else
         {
-            //$mixtapes = $this->mixtapeRepository->getAllMixtapesForUser($this->userModel->retriveUserID());
-
             $content = "<div class='container'>
-                            <h1>Showing your mixtapes</h1>";
+                            <h1>Showing your mixtapes</h1>
+                            <p>&nbsp;</p>
+
+                            ";
 
             foreach ($mixtapes->toArray() as $mixtape) {
-                $content .= "<h2>". $mixtape->getName() .  "</h2>";
+                $content .= "<div class='row'><div class='col-md-2'><img class='img' src='src/gfx/playlistImages/" . $mixtape->getPicture() . "' /></div>";
+                $content .= "<div class='col-md-10'><h2 class='noSpacing'>". $mixtape->getName() .  "</h2>";
                 $content .= "<p>". $mixtape->getCreationDate() . "</p>";
-                $content .= "<p><a href='?action=mixtape&mixtapeID=". $mixtape->getMixtapeID() . "'>View mixtape</a></p>";
+                $content .= "<p><a href='?action=mixtape&mixtapeID=". $mixtape->getMixtapeID() . "'>View mixtape</a></p></div></div><p>&nbsp;</p>";
             };
 
             $content .= "</div>";
