@@ -9,7 +9,7 @@ require_once("./src/model/MixtapeList.php");
 require_once("./src/model/MixtapeRowList.php");
 
 class MixtapeRepository extends Repository {
-    // Mixtape-table fields, note that the auto-timestamp field CreationDate is not listed here, but exists in DB.
+    // Mixtape-table fields
     private static $userID = "UserID";
     private static $name = "Name";
     private static $picture = "Picture";
@@ -17,6 +17,7 @@ class MixtapeRepository extends Repository {
     private $lastInsertedID;
 
     // MixtapeRow-table fields
+    private static $mixtapeRowID = "MixtapeRowID";
     private static $mixtapeID = "MixtapeID"; // Exists of course in the mixtape-table above as well.
     private static $song = "Song";
 
@@ -65,7 +66,7 @@ class MixtapeRepository extends Repository {
 
     public function getAllMixtapes() {
         $db = $this->connection();
-        $sql = "SELECT * FROM $this->dbTable";
+        $sql = "SELECT * FROM $this->dbTable ORDER BY self::creationDate DESC";
         $query = $db->prepare($sql);
         $query->execute();
 
@@ -80,7 +81,7 @@ class MixtapeRepository extends Repository {
 
     public function getAllMixtapeRows($mixtapeID) {
         $db = $this->connection();
-        $sql = "SELECT * FROM $this->dbTableSecondary WHERE " . self::$mixtapeID . " = ?";
+        $sql = "SELECT * FROM $this->dbTableSecondary WHERE " . self::$mixtapeID . " = ? ORDER BY " . self::$mixtapeRowID . " ASC";
         $params = array($mixtapeID);
         $query = $db->prepare($sql);
         $query->execute($params);
@@ -95,7 +96,7 @@ class MixtapeRepository extends Repository {
 
     public function getAllMixtapesForUser($userID) {
         $db = $this->connection();
-        $sql = "SELECT * FROM $this->dbTable WHERE " . self::$userID . " = ?";
+        $sql = "SELECT * FROM $this->dbTable WHERE " . self::$userID . " = ? ORDER BY " . self::$creationDate . " DESC";
         $params = array($userID);
         $query = $db->prepare($sql);
         $query->execute($params);
