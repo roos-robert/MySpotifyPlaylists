@@ -36,11 +36,20 @@ class UserModel {
 
     // Automatic login.
     public function doAutoLogin($username, $token) {
-        if ($username == $_COOKIE['username'] && $this->retriveToken($username) == $token)
+        $user = $this->userRepository->get($username);
+
+        if($user != NULL)
         {
-            $_SESSION[$this->sessionLocation] = true;
-            $_SESSION[$this->sessionUsername] = $username;
-            $_SESSION[$this->sessionUserID] = $user["UserID"];
+            if ($username == $_COOKIE['username'] && $this->retriveToken($username) == $token)
+            {
+                $_SESSION[$this->sessionLocation] = true;
+                $_SESSION[$this->sessionUsername] = $username;
+                $_SESSION[$this->sessionUserID] = $user["UserID"];
+            }
+            else
+            {
+                throw new \Exception;
+            }
         }
         else
         {
