@@ -83,6 +83,51 @@ class NewMixtapeController {
         {
             return $this->view->showPageUpdateMixtape($this->mixtapeRepository->getSingleMixtape($_GET["mixtapeID"]), $this->mixtapeRepository->getAllMixtapeRows($_GET["mixtapeID"]));
         }
+        elseif($this->view->onClickUpdateMixtape())
+        {
+
+            // Saving the mixtape image to server if a new image is to replace the old one
+            if (!empty($_FILES['image']['name']))
+            {
+                try
+                {
+                    $mixtapeImagePath = $this->view->uploadMixtapeImage();
+                }
+                catch (\Exception $e)
+                {
+                    $this->messages->save("Image could not be saved, is it meeting the requirements?");
+                    return $this->view->showPage();
+                }
+            }
+
+            // Saving the mixtape to the database.
+            try
+            {
+                $this->mixtapeModel = new \model\MixtapeModel($this->userModel->retriveUserID(), $this->view->getPostedMixtapeName(), $this->view->getPostedPicPath(), $this->view->getPostedMixtapeID());
+                $this->mixtapeRepository->updateMixtape($this->mixtapeModel);
+
+                $mixtapeLinksValidated = array();
+
+                // Splits the values at "newline" and throws them into a array
+                $mixtapeLinks = explode("\n", $this->getPostedMixtapeLinks());
+                // Arrays whos indexes contains nothing are removed
+                $emptyRemoved = array_diff($mixtapeLinks, array(''));
+
+                // Trimming away unwanted whitespaces from the links (if they exist)
+                foreach ($emptyRemoved as $mixtapeLink) {
+                    array_push($mixtapeLinksValidated, trim($mixtapeLink));
+                }
+
+                $this->mixtapeRepository->addMixtapeRow($mixtapeID, $mixtapeLinksValidated);
+            }
+            catch (\Exception $e)
+            {
+                $this->messages->save("Mixtape could not be saved, our database is a bit wonky at the moment!");
+                return $this->view->showPage();
+            }
+
+            return $this->view->showMixtapeAdded();
+        }
 
         return $this->view->showPage();
     }

@@ -109,6 +109,18 @@ class MixtapeRepository extends Repository {
         return $mixtapeList;
     }
 
+    // Updates a existing mixtape in the database.
+    public function updateMixtape(MixtapeModel $mixtape) {
+        $db = $this->connection();
+        $sql = "INSERT INTO $this->dbTable(" . self::$userID . ", " . self::$name . ", " . self::$picture . ") VALUES (?, ?, ?)";
+        $params = array($mixtape->getUserID(), $mixtape->getName(), $mixtape->getPicture());
+        $query = $db->prepare($sql);
+        $query->execute($params);
+
+        return $db->lastInsertId();
+    }
+
+    // Removes a mixtape with it's mixtapeRows from the database.
     public function removeMixtape($mixtapeID) {
         $db = $this -> connection();
         $sql = "DELETE FROM $this->dbTable WHERE " . self::$mixtapeID . " = ?";

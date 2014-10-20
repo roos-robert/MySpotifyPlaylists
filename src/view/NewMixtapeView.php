@@ -11,6 +11,12 @@ class NewMixtapeView {
     public function getPostedMixtapeName() {
         return $_POST["mixtapeName"];;
     }
+    public function getPostedPicPath() {
+        return $_POST["picPath"];;
+    }
+    public function getPostedMixtapeID() {
+        return $_POST["mixtapeID"];;
+    }
     public function getPostedMixtapeLinks() {
         return $_POST["mixtapeLinks"];;
     }
@@ -177,6 +183,8 @@ class NewMixtapeView {
         $content .= "</textarea><br />
                 <label><strong>Choose a new mixtape image (max 200kb, OPTIONAL!): </strong></label>
                 <p><img src='src/gfx/playlistImages/" . $mixtape->getPicture() . "' width='50' alt='Current mixtape image' title='Current mixtape image' /></p>
+                <input type='hidden' name='picPath' value='" . $mixtape->getPicture() . "' />
+                <input type='hidden' name='mixtapeID' value='" . $mixtape->getMixtapeID() . "' />
                 <input type='file' name='image'><br />
                 <input type='submit' value='Update mixtape' name='updateMixtapeButton' class='btn btn-default' />
                 </fieldset>
