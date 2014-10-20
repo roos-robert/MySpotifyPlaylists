@@ -2,6 +2,7 @@
 namespace view;
 
 use model\MixtapeModel;
+use model\MixtapeRowList;
 
 class NewMixtapeView {
 
@@ -136,8 +137,8 @@ class NewMixtapeView {
     }
 
     // This is shown when a exisiting mixtape is to be updated.
-    public function showPageUpdateMixtape(MixtapeModel $mixtape) {
-        return "
+    public function showPageUpdateMixtape(MixtapeModel $mixtape, MixtapeRowList $mixtapeRows) {
+        $content = "
         <div class='jumbotron'>
                   <div class='container'>
                     <img src='src/gfx/Logo.png' width='500' height='200' alt='Mixtapeify' />
@@ -155,7 +156,13 @@ class NewMixtapeView {
                 <label><strong>Mixtape name: </strong></label>
                 <input type='text' name='mixtapeName' class='form-control' value='" . $mixtape->getName() . "' /><br />
                 <label><strong>Mixtape songs: </strong></label>
-                <textarea class='form-control' rows='20' name='mixtapeLinks'></textarea><br />
+                <textarea class='form-control' rows='20' name='mixtapeLinks'>";
+
+                foreach ($mixtapeRows->toArray() as $mixtapeRow) {
+                    $content .= $mixtapeRow->getSong() .  "\n";
+                };
+
+        $content .= "</textarea><br />
                 <label><strong>Choose a new mixtape image (max 200kb, OPTIONAL!): </strong></label>
                 <p><img src='src/gfx/playlistImages/" . $mixtape->getPicture() . "' width='50' alt='Current mixtape image' title='Current mixtape image' /></p>
                 <input type='file' name='image'><br />
@@ -163,6 +170,8 @@ class NewMixtapeView {
                 </fieldset>
             </form>
         </div>";
+
+        return $content;
     }
 
     // This is shown when a new mixtape is to be added.

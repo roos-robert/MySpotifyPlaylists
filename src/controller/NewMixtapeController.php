@@ -81,7 +81,7 @@ class NewMixtapeController {
         }
         elseif($this->view->mixtapeUpdateChosen())
         {
-            return $this->view->showPageUpdateMixtape($this->mixtapeRepository->getSingleMixtape($_GET["mixtapeID"]));
+            return $this->view->showPageUpdateMixtape($this->mixtapeRepository->getSingleMixtape($_GET["mixtapeID"]), $this->mixtapeRepository->getAllMixtapeRows($_GET["mixtapeID"]));
         }
 
         return $this->view->showPage();
