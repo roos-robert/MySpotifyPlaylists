@@ -10,6 +10,7 @@ require_once('./src/controller/LoginController.php');
 require_once('./src/controller/SignupController.php');
 require_once('./src/controller/NewMixtapeController.php');
 require_once('./src/controller/MixtapeController.php');
+require_once('./src/controller/MixtapesController.php');
 require_once('./src/controller/MyMixtapesController.php');
 
 /*
@@ -46,7 +47,7 @@ class NavigationController {
                     return $this->controller->checkActions();
                     break;
                 case \view\NavigationView::$actionAllMixtapes:
-                    $this->controller = new MyMixtapesController();
+                    $this->controller = new MixtapesController();
                     return $this->controller->checkActions();
                     break;
                 default:

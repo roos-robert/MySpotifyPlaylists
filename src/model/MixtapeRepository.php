@@ -66,7 +66,7 @@ class MixtapeRepository extends Repository {
 
     public function getAllMixtapes() {
         $db = $this->connection();
-        $sql = "SELECT * FROM $this->dbTable ORDER BY self::creationDate DESC";
+        $sql = "SELECT * FROM $this->dbTable ORDER BY " . self::$creationDate . " DESC";
         $query = $db->prepare($sql);
         $query->execute();
 
