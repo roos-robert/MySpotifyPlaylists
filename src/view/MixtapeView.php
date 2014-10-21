@@ -64,7 +64,7 @@ class MixtapeView {
                     $res = json_decode($string, true);
                     $trackArtists = $res["track"]["artists"];
 
-                    $content .= "<div class='row'><div class='col-md-12'>";
+                    $content .= "<div class='row'><div class='col-md-12'><a href='" . $mixtapeRow->getSong() . "' class='glyphicon glyphicon-play' title='Click to play in Spotify'></a> ";
                     foreach ($trackArtists as $trackArtist) {
                         $content .= "<strong>" . $trackArtist["name"] . ", </strong>";
                     }
