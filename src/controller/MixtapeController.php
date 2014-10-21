@@ -55,6 +55,7 @@ class MixtapeController {
                 return $this->view->showPage($this->mixtapeRepository->getSingleMixtape($_GET["mixtapeID"]), $this->mixtapeRepository->getAllMixtapeRows($_GET["mixtapeID"]));
             }
         }
+        // If a mixtape is chosen, it will be fetched from the database and presented to the User.
         elseif($this->view->mixtapeChosen())
         {
             return $this->view->showPage($this->mixtapeRepository->getSingleMixtape($_GET["mixtapeID"]), $this->mixtapeRepository->getAllMixtapeRows($_GET["mixtapeID"]));

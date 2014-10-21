@@ -3,13 +3,11 @@ namespace view;
 
 class MyMixtapesView {
     private $userModel;
-
     private $messages;
 
     public function __construct()
     {
         $this->userModel = new \model\UserModel();
-
         $this->messages = new \view\MessageView();
     }
 
@@ -33,6 +31,7 @@ class MyMixtapesView {
 
                             ";
 
+            // Loops out all the mixtapes that has the same UserID as the currently logged in User.
             foreach ($mixtapes->toArray() as $mixtape) {
                 $content .= "<div class='row'><div class='col-md-2'><img class='img' src='src/gfx/playlistImages/" . $mixtape->getPicture() . "' /></div>";
                 $content .= "<div class='col-md-10'><h2 class='noSpacing'>". $mixtape->getName() .  "</h2>";

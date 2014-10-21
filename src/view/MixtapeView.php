@@ -14,6 +14,7 @@ class MixtapeView {
         $this->messages = new \view\MessageView();
     }
 
+    // Checks if a mixtape has been chosen
     public function mixtapeChosen() {
         if (isset($_GET["mixtapeID"]))
         {
@@ -25,6 +26,7 @@ class MixtapeView {
         }
     }
 
+    // Checks if the action for removing a mixtape has been set
     public function mixtapeRemoveChosen() {
         if (isset($_GET["remove"]))
         {
@@ -44,6 +46,7 @@ class MixtapeView {
                 </div>";
     }
 
+    // Converts the input parameter (which in in seconds) to the format mm:ss
     function convertToMin($time) {
         $s = $time%60;
         $m = floor(($time%3600)/60);
@@ -56,15 +59,15 @@ class MixtapeView {
             if($mixtape != NULL)
             {
                 $content = "<div class='jumbotron'>
-                  <div class='container'>
-                    <img src='src/gfx/Logo.png' width='500' height='200' alt='Mixtapeify' />
-                  </div>
-                </div>
-                <div class='container'>";
+                              <div class='container'>
+                                <img src='src/gfx/Logo.png' width='500' height='200' alt='Mixtapeify' />
+                              </div>
+                            </div>
+                            <div class='container'>";
                 $content .= "<h1>Mixtape: " . $mixtape->getName() . "</h1>"  . $this->messages->load() . "
-            <p>" . $mixtape->getCreationDate() . "</p><p></p>
-            <img src='src/gfx/playlistImages/" . $mixtape->getPicture() . "' width='250' />
-            <h3>Songs</h3>";
+                            <p>" . $mixtape->getCreationDate() . "</p><p></p>
+                            <img src='src/gfx/playlistImages/" . $mixtape->getPicture() . "' width='250' />
+                            <h3>Songs</h3>";
 
                 foreach ($mixtapeRows->toArray() as $mixtapeRow) {
                     $string = file_get_contents("http://ws.spotify.com/lookup/1/.json?uri=" . $mixtapeRow->getSong());
@@ -72,6 +75,8 @@ class MixtapeView {
                     $trackArtists = $res["track"]["artists"];
 
                     $content .= "<div class='row'><div class='col-md-12'><a href='" . $mixtapeRow->getSong() . "' class='glyphicon glyphicon-play' title='Click to play in Spotify'></a> ";
+
+                    // Since a song can have several artists, these are delivered as a object in the JSON-request.
                     foreach ($trackArtists as $trackArtist) {
                         $content .= "<strong>" . $trackArtist["name"] . ", </strong>";
                     }
@@ -94,15 +99,14 @@ class MixtapeView {
             else
             {
                 return "<div class='jumbotron'>
-                  <div class='container'>
-                    <img src='src/gfx/Logo.png' width='500' height='200' alt='Mixtapeify' />
-                  </div>
-                </div>
-                <div class='container'>
-                <h1>Not found</h1>
-                <p>No mixtape with that ID was found</p>
-                </div>";
+                          <div class='container'>
+                            <img src='src/gfx/Logo.png' width='500' height='200' alt='Mixtapeify' />
+                          </div>
+                        </div>
+                        <div class='container'>
+                        <h1>Not found</h1>
+                        <p>No mixtape with that ID was found</p>
+                        </div>";
             }
-
     }
 }

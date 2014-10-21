@@ -14,13 +14,11 @@ class MixtapeRepository extends Repository {
     private static $name = "Name";
     private static $picture = "Picture";
     private static $creationDate = "DateCreated";
-    private $lastInsertedID;
 
     // MixtapeRow-table fields
     private static $mixtapeRowID = "MixtapeRowID";
     private static $mixtapeID = "MixtapeID"; // Exists of course in the mixtape-table above as well.
     private static $song = "Song";
-
 
     public function __construct() {
         $this->dbTable = "mixtape";
@@ -50,6 +48,7 @@ class MixtapeRepository extends Repository {
         }
     }
 
+    // Gets the requested mixtape from the database, returns a MixtapeModel object.
     public function getSingleMixtape($mixtapeID) {
         $db = $this->connection();
         $sql = "SELECT * FROM $this->dbTable WHERE " . self::$mixtapeID . " = ?";
@@ -64,6 +63,7 @@ class MixtapeRepository extends Repository {
         return NULL;
     }
 
+    // Retrieves all the mixtapes in the database, returns a MixtapeList populated with MixtapeModel objects.
     public function getAllMixtapes() {
         $db = $this->connection();
         $sql = "SELECT * FROM $this->dbTable ORDER BY " . self::$creationDate . " DESC";
@@ -79,6 +79,7 @@ class MixtapeRepository extends Repository {
         return $mixtapeList;
     }
 
+    // Retrieves all the mixtape rows for a given mixtape, returns a MixtapeRowList populated with MixtapeRow objects.
     public function getAllMixtapeRows($mixtapeID) {
         $db = $this->connection();
         $sql = "SELECT * FROM $this->dbTableSecondary WHERE " . self::$mixtapeID . " = ? ORDER BY " . self::$mixtapeRowID . " ASC";
@@ -94,6 +95,7 @@ class MixtapeRepository extends Repository {
         return $mixtapeRowList;
     }
 
+    // Retrives all mixtapes for the given user, returns a MixtapeList containting MixtapeModel objects.
     public function getAllMixtapesForUser($userID) {
         $db = $this->connection();
         $sql = "SELECT * FROM $this->dbTable WHERE " . self::$userID . " = ? ORDER BY " . self::$creationDate . " DESC";
@@ -109,7 +111,9 @@ class MixtapeRepository extends Repository {
         return $mixtapeList;
     }
 
-    // Updates a existing mixtape in the database.
+    // Updates a existing mixtape in the database, and to be noted is that when a mixtape is updated. All it's MixtapesRows are deleted
+    // and then replaced by new rows. This is intentional, since it's highly likley that the user pastes updates directly from Spotify
+    // checking changes row for row is therefor useless.
     public function updateMixtape(MixtapeModel $mixtape) {
         $db = $this->connection();
         $sql = "UPDATE $this->dbTable SET " . self::$userID . "=?," . self::$name . "=?," . self::$picture . "=? WHERE " . self::$mixtapeID . "=?";

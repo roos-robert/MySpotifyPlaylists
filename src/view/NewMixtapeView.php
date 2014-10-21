@@ -5,7 +5,6 @@ use model\MixtapeModel;
 use model\MixtapeRowList;
 
 class NewMixtapeView {
-
     private $messages;
 
     public function getPostedMixtapeName() {
@@ -157,7 +156,7 @@ class NewMixtapeView {
     // This is shown when a exisiting mixtape is to be updated.
     public function showPageUpdateMixtape(MixtapeModel $mixtape, MixtapeRowList $mixtapeRows) {
         $content = "
-        <div class='jumbotron'>
+                <div class='jumbotron'>
                   <div class='container'>
                     <img src='src/gfx/Logo.png' width='500' height='200' alt='Mixtapeify' />
                   </div>
@@ -176,6 +175,7 @@ class NewMixtapeView {
                 <label><strong>Mixtape songs: </strong></label>
                 <textarea class='form-control' rows='20' name='mixtapeLinks'>";
 
+                // Loops out all of the mixtapes row into the textarea.
                 foreach ($mixtapeRows->toArray() as $mixtapeRow) {
                     $content .= $mixtapeRow->getSong() .  "\n";
                 };
@@ -209,7 +209,6 @@ class NewMixtapeView {
             <p>Creating a new mixtape is easy! Just give your mixtape a name, then highlight your songs of choice from spotify and choose copy URI, then paste it in the
             textarea down below. Check out <a href='?action=home&about=show'>this guide</a> if you are uncertain of how things work!</p>
             <p>&nbsp;</p>
-
              <form action='' method='post' name='newMixtapeForm' enctype='multipart/form-data'>
                 <fieldset>
                 <legend>Create your new mixtape</legend><p style='color: red;'>" . $this->messages->load() . "</p>

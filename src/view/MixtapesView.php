@@ -33,6 +33,7 @@ class MixtapesView {
 
                             ";
 
+            // Loops out all of the mixtapes from the database.
             foreach ($mixtapes->toArray() as $mixtape) {
                 $content .= "<div class='col-md-3'><img class='img' src='src/gfx/playlistImages/" . $mixtape->getPicture() . "' />";
                 $content .= "<h4 class='noSpacing'>". $mixtape->getName() .  "</h4>";

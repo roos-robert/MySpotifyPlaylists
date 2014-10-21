@@ -9,7 +9,6 @@ require_once("src/model/UserModel.php");
 require_once("src/model/MixtapeModel.php");
 
 class NewMixtapeController {
-
     private $view;
     private $messages;
     private $userModel;
@@ -79,11 +78,13 @@ class NewMixtapeController {
                 return $this->view->showMixtapeAdded();
             }
         }
+        // If a mixtape has been chosen to be updated, it's data is collected from the DB and presented in a "update mixtape" form.
         elseif($this->view->mixtapeUpdateChosen() && !$this->view->onClickUpdateMixtape())
         {
             return $this->view->showPageUpdateMixtape($this->mixtapeRepository->getSingleMixtape($_GET["mixtapeID"]), $this->mixtapeRepository->getAllMixtapeRows($_GET["mixtapeID"]));
         }
 
+        // If the button for updating a mixtape (from the mixtape form) has been clicked
         if($this->view->onClickUpdateMixtape())
         {
             // Saving the mixtape image to server if a new image is to replace the old one

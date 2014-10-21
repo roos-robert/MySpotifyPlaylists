@@ -3,7 +3,6 @@
 namespace view;
 
 class AboutView {
-
     private $model;
     private $messages;
 
