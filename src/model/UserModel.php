@@ -27,6 +27,10 @@ class UserModel {
                 $_SESSION[$this->sessionUsername] = $username;
                 $_SESSION[$this->sessionUserID] = $user["UserID"];
             }
+            else
+            {
+                throw new \Exception;
+            }
         }
         else
         {
