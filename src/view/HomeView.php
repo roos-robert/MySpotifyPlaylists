@@ -34,7 +34,7 @@ class HomeView {
                     </div>
 
                     <div class='container'>
-                        <p>" . $this->messages->load() . "</p>
+                        <p><strong>" . $this->messages->load() . "</strong></p>
                         <h2>Welcome!</h2>
                         <p>Want to save and share Spotify playlists? You've come to the right place!</p>
                         <h3>It's easy!</h3>
@@ -55,7 +55,7 @@ class HomeView {
                     </div>
 
                     <div class='container'>
-                        <p>" . $this->messages->load() . "</p>
+                        <p><strong>" . $this->messages->load() . "</strong></p>
                         <h2>Welcome " . $this->model->retriveUsername() . "!</h2>
                         <p>Nice day for a new mixtape right? <a href='?action=newMixtape'>Create</a> a new one right now!</p>
                         <h3>Listen to mixtapes</h3>
