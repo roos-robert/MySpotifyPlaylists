@@ -20,7 +20,7 @@ class HTMLView {
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <meta name='description' content=''>
+    <meta name='description' content='At Mixtapeify you can backup all of your Spotify playlists and share them with friends!'>
     <meta name='author' content='Robert Roos'>
     <link rel='icon' href='./favicon.ico'>
     <title>Mixtapeify</title>

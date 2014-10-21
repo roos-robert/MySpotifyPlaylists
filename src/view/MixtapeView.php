@@ -84,6 +84,12 @@ class MixtapeView {
                     $content .= " - " .  $res["track"]["name"] . " (" . $this->convertToMin($res["track"]["length"]) . ")</div></div><p>&nbsp;</p>";
                 };
 
+                $twitterButton = "<a href='https://twitter.com/share' class='twitter-share-button' data-text='Check out this cool playlist!' data-related='RobertRoos_' data-hashtags='mixtapeify'>Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>";
+
+                $content .= "<h3>Share</h3>
+                             " . $twitterButton;
+
                 // Only presents the update and remove buttons if the logged in user is the creator of the playlist.
                 if($this->userModel->retriveUserID() == $mixtape->getUserID())
                 {
