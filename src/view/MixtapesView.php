@@ -41,7 +41,7 @@ class MixtapesView {
                 $content .= "<p><a class='btn btn-default' href='?action=mixtape&mixtapeID=". $mixtape->getMixtapeID() . "'>View mixtape</a></p></div>";
             };
 
-            $content .= "</div>";
+            $content .= "</div><p>&nbsp;</p>";
 
             return $content;
         }

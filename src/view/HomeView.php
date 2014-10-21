@@ -61,7 +61,9 @@ class HomeView {
                         <h3>Listen to mixtapes</h3>
                         <p>Or why not look at some other mixtapes submitted by our growing community? Check them out right
                          <a href='?action=allMixtapes'>here</a>!</p>
-                    </div>";
+                        <h3>How to?</h3>
+                        <p>Check out our guide for how you add a new mixtape right here: <a href='?action=home&about=show'>Create a mixtape</a></p>
+                    </div><p>&nbsp;</p>";
         }
     }
 }

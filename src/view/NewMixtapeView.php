@@ -221,6 +221,6 @@ class NewMixtapeView {
                 <input type='submit' value='Create mixtape' name='createMixtapeButton' class='btn btn-default' />
                 </fieldset>
             </form>
-        </div>";
+        </div><p>&nbsp;</p>";
     }
 }
