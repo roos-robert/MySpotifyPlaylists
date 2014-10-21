@@ -79,13 +79,13 @@ class NewMixtapeController {
                 return $this->view->showMixtapeAdded();
             }
         }
-        elseif($this->view->mixtapeUpdateChosen())
+        elseif($this->view->mixtapeUpdateChosen() && !$this->view->onClickUpdateMixtape())
         {
             return $this->view->showPageUpdateMixtape($this->mixtapeRepository->getSingleMixtape($_GET["mixtapeID"]), $this->mixtapeRepository->getAllMixtapeRows($_GET["mixtapeID"]));
         }
-        elseif($this->view->onClickUpdateMixtape())
-        {
 
+        if($this->view->onClickUpdateMixtape())
+        {
             // Saving the mixtape image to server if a new image is to replace the old one
             if (!empty($_FILES['image']['name']))
             {
@@ -103,7 +103,15 @@ class NewMixtapeController {
             // Saving the mixtape to the database.
             try
             {
-                $this->mixtapeModel = new \model\MixtapeModel($this->userModel->retriveUserID(), $this->view->getPostedMixtapeName(), $this->view->getPostedPicPath(), $this->view->getPostedMixtapeID());
+                if (empty($_FILES['image']['name']))
+                {
+                    $this->mixtapeModel = new \model\MixtapeModel($this->userModel->retriveUserID(), $this->view->getPostedMixtapeName(), $this->view->getPostedPicPath(), $this->view->getPostedMixtapeID());
+                }
+                else
+                {
+                    $this->mixtapeModel = new \model\MixtapeModel($this->userModel->retriveUserID(), $this->view->getPostedMixtapeName(), $mixtapeImagePath, $this->view->getPostedMixtapeID());
+                }
+
                 $this->mixtapeRepository->updateMixtape($this->mixtapeModel);
 
                 $mixtapeLinksValidated = array();
@@ -118,7 +126,7 @@ class NewMixtapeController {
                     array_push($mixtapeLinksValidated, trim($mixtapeLink));
                 }
 
-                $this->mixtapeRepository->addMixtapeRow($mixtapeID, $mixtapeLinksValidated);
+                $this->mixtapeRepository->addMixtapeRow($this->mixtapeModel->getMixtapeID(), $mixtapeLinksValidated);
             }
             catch (\Exception $e)
             {

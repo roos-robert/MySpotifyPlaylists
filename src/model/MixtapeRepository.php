@@ -112,12 +112,16 @@ class MixtapeRepository extends Repository {
     // Updates a existing mixtape in the database.
     public function updateMixtape(MixtapeModel $mixtape) {
         $db = $this->connection();
-        $sql = "INSERT INTO $this->dbTable(" . self::$userID . ", " . self::$name . ", " . self::$picture . ") VALUES (?, ?, ?)";
-        $params = array($mixtape->getUserID(), $mixtape->getName(), $mixtape->getPicture());
+        $sql = "UPDATE $this->dbTable SET " . self::$userID . "=?," . self::$name . "=?," . self::$picture . "=? WHERE " . self::$mixtapeID . "=?";
+        $params = array($mixtape->getUserID(), $mixtape->getName(), $mixtape->getPicture(), $mixtape->getMixtapeID());
         $query = $db->prepare($sql);
         $query->execute($params);
 
-        return $db->lastInsertId();
+        $db = $this -> connection();
+        $sql = "DELETE FROM $this->dbTableSecondary WHERE " . self::$mixtapeID . " = ?";
+        $params = array($mixtape->getMixtapeID());
+        $query = $db -> prepare($sql);
+        $query -> execute($params);
     }
 
     // Removes a mixtape with it's mixtapeRows from the database.
