@@ -44,6 +44,13 @@ class MixtapeView {
                 </div>";
     }
 
+    function convertToMin($time) {
+        $s = $time%60;
+        $m = floor(($time%3600)/60);
+
+        return "$m:$s";
+    }
+
     public function showPage($mixtape, $mixtapeRows) {
 
             if($mixtape != NULL)
@@ -69,7 +76,7 @@ class MixtapeView {
                         $content .= "<strong>" . $trackArtist["name"] . ", </strong>";
                     }
 
-                    $content .= " - " .  $res["track"]["name"] . "</div></div><p>&nbsp;</p>";
+                    $content .= " - " .  $res["track"]["name"] . " (" . $this->convertToMin($res["track"]["length"]) . ")</div></div><p>&nbsp;</p>";
                 };
 
                 // Only presents the update and remove buttons if the logged in user is the creator of the playlist.
