@@ -7,8 +7,11 @@ use model\MixtapeRowList;
 class NewMixtapeView {
     private $messages;
 
+    // Fields to handle dependencies, note in this class that some of the getters takes over this functionality.
+    private static $mixtapeName = "mixtapeName";
+
     public function getPostedMixtapeName() {
-        return $_POST["mixtapeName"];;
+        return $_POST[self::$mixtapeName];;
     }
     public function getPostedPicPath() {
         return $_POST["picPath"];;
@@ -197,7 +200,7 @@ class NewMixtapeView {
 
     // This is shown when a new mixtape is to be added.
     public function showPage() {
-        $mixtapeName = isset($_POST["mixtapeName"]) ? $_POST["mixtapeName"] : "";
+        $mixtapeName = isset($_POST[self::$mixtapeName]) ? $_POST[self::$mixtapeName] : "";
         return "
         <div class='jumbotron'>
                   <div class='container'>

@@ -7,6 +7,10 @@ class MixtapeView {
     private $mixtapeRepository;
     private $messages;
 
+    // Fields to handle string dependencies
+    private static $mixtapeID = "mixtapeID";
+    private static $remove = "remove";
+
     public function __construct()
     {
         $this->userModel = new \model\UserModel();
@@ -16,7 +20,7 @@ class MixtapeView {
 
     // Checks if a mixtape has been chosen
     public function mixtapeChosen() {
-        if (isset($_GET["mixtapeID"]))
+        if (isset($_GET[self::$mixtapeID]))
         {
             return true;
         }
@@ -28,7 +32,7 @@ class MixtapeView {
 
     // Checks if the action for removing a mixtape has been set
     public function mixtapeRemoveChosen() {
-        if (isset($_GET["remove"]))
+        if (isset($_GET[self::$remove]))
         {
             return true;
         }

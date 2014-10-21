@@ -3,13 +3,11 @@ namespace view;
 
 class MixtapesView {
     private $userModel;
-
     private $messages;
 
     public function __construct()
     {
         $this->userModel = new \model\UserModel();
-
         $this->messages = new \view\MessageView();
     }
 

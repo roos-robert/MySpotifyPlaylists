@@ -7,11 +7,18 @@ require_once("src/view/MessageView.php");
 require_once("src/model/MixtapeList.php");
 
 class MixtapeController {
-
     private $userModel;
     private $mixtapeRepository;
     private $view;
     private $messages;
+
+    // Fields to handle string dependencies
+    private static $mixtapeID = "mixtapeID";
+
+    // Getters
+    public function getMixtapeID() {
+        return $_GET[self::$mixtapeID];
+    }
 
     // Constructor, connects all the layers
     public function __construct() {
@@ -26,19 +33,20 @@ class MixtapeController {
         // If a user want's to remove one of his own mixtapes.
         if($this->view->mixtapeRemoveChosen())
         {
-            $mixtape = $this->mixtapeRepository->getSingleMixtape($_GET["mixtapeID"]);
+            $mixtape = $this->mixtapeRepository->getSingleMixtape($this->getMixtapeID());
 
+            // If the mixtape that is to be removed exists, then.
             if($mixtape != NULL)
             {
                 if($mixtape->getUserID() == $this->userModel->retriveUserID())
                 {
                     try
                     {
-                        $this->mixtapeRepository->removeMixtape($_GET["mixtapeID"]);
+                        $this->mixtapeRepository->removeMixtape($this->getMixtapeID());
                     }
                     catch (\Exception $e)
                     {
-                        return $this->view->showPage($this->mixtapeRepository->getSingleMixtape($_GET["mixtapeID"]), $this->mixtapeRepository->getAllMixtapeRows($_GET["mixtapeID"]));
+                        return $this->view->showPage($this->mixtapeRepository->getSingleMixtape($this->getMixtapeID()), $this->mixtapeRepository->getAllMixtapeRows($this->getMixtapeID()));
                     }
 
                     return $this->view->MixtapeRemoved();
@@ -46,19 +54,19 @@ class MixtapeController {
                 else
                 {
                     $this->messages->save("You cannot remove another users mixtape!");
-                    return $this->view->showPage($this->mixtapeRepository->getSingleMixtape($_GET["mixtapeID"]), $this->mixtapeRepository->getAllMixtapeRows($_GET["mixtapeID"]));
+                    return $this->view->showPage($this->mixtapeRepository->getSingleMixtape($this->getMixtapeID()), $this->mixtapeRepository->getAllMixtapeRows($this->getMixtapeID()));
                 }
             }
             else
             {
                 $this->messages->save("You cannot remove a mixtape that does not exist!");
-                return $this->view->showPage($this->mixtapeRepository->getSingleMixtape($_GET["mixtapeID"]), $this->mixtapeRepository->getAllMixtapeRows($_GET["mixtapeID"]));
+                return $this->view->showPage($this->mixtapeRepository->getSingleMixtape($this->getMixtapeID()), $this->mixtapeRepository->getAllMixtapeRows($this->getMixtapeID()));
             }
         }
         // If a mixtape is chosen, it will be fetched from the database and presented to the User.
         elseif($this->view->mixtapeChosen())
         {
-            return $this->view->showPage($this->mixtapeRepository->getSingleMixtape($_GET["mixtapeID"]), $this->mixtapeRepository->getAllMixtapeRows($_GET["mixtapeID"]));
+            return $this->view->showPage($this->mixtapeRepository->getSingleMixtape($this->getMixtapeID()), $this->mixtapeRepository->getAllMixtapeRows($this->getMixtapeID()));
         }
         else
         {

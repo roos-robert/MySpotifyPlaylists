@@ -14,8 +14,6 @@ class SignupController {
     private $view;
     private $messages;
 
-
-
     // Constructor, connects all the layers
     public function __construct() {
         $this->model = new \model\UserModel();

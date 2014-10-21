@@ -13,11 +13,15 @@ class LoginController {
     private $messages;
     private $autoLogin;
 
+    // Fields to handle string dependencies
+    private static $username = "username";
+    private static $password = "password";
+
     public function getPostedUsername() {
-        return $_POST["username"];
+        return $_POST[self::$username];
     }
     public function getPostedPassword() {
-        return $_POST["password"];
+        return $_POST[self::$password];
     }
 
     // Constructor, connects all the layers

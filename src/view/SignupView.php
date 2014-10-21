@@ -11,18 +11,24 @@ class SignupView {
     private $userRepository;
     private $messages;
 
+    // Fields to handle string dependencies
+    private static $username = "username";
+    private static $password = "password";
+    private static $passwordCheck = "passwordCheck";
+    private static $email = "email";
+
     // Getters for the forms
     public function getPostedUsername() {
-        return $_POST["username"];;
+        return $_POST[self::$username];;
     }
     public function getPostedPassword() {
-        return $_POST["password"];;
+        return $_POST[self::$password];;
     }
     public function getPostedPasswordCheck() {
-        return $_POST["passwordCheck"];;
+        return $_POST[self::$passwordCheck];;
     }
     public function getPostedEmail() {
-        return $_POST["email"];;
+        return $_POST[self::$email];;
     }
 
     public function __construct(\model\UserModel $model) {
@@ -105,8 +111,8 @@ class SignupView {
     public function showPage() {
         if($this->model->getLoginStatus() === false || $this->sessionCheck() === false)
         {
-            $username = isset($_POST["username"]) ? $_POST["username"] : "";
-            $email = isset($_POST["email"]) ? $_POST["email"] : "";
+            $username = isset($_POST[self::$username]) ? $_POST[self::$username] : "";
+            $email = isset($_POST[self::$email]) ? $_POST[self::$email] : "";
             return "
         <div class='container'>
             <h1>Register</h1>

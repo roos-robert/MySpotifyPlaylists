@@ -10,6 +10,11 @@ class LoginView {
     private $model;
     private $messages;
 
+    // Fields to handle string dependencies
+    private static $loginButton = "loginButton";
+    private static $logoutButton = "logout";
+    private static $username = "username";
+
     public function __construct(\model\UserModel $model)
     {
         $this->model = $model;
@@ -18,7 +23,7 @@ class LoginView {
 
     // Checks if the user has pressed the login button.
     public function onClickLogin() {
-        if(isset($_POST["loginButton"]))
+        if(isset($_POST[self::$loginButton]))
         {
             return true;
         }
@@ -30,7 +35,7 @@ class LoginView {
 
     // Checks if the user has pressed the logout button.
     public function onClickLogout() {
-        if(isset($_GET['logout']))
+        if(isset($_GET[self::$logoutButton]))
         {
             return true;
         }
@@ -51,7 +56,7 @@ class LoginView {
     public function showPage() {
         if($this->model->getLoginStatus() === false || $this->sessionCheck() === false)
         {
-            $username = isset($_POST["username"]) ? $_POST["username"] : "";
+            $username = isset($_POST[self::$username]) ? $_POST[self::$username] : "";
             return "
         <div class='container'>
             <h1>Login</h1>

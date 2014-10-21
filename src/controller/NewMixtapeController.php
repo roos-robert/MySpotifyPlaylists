@@ -15,11 +15,20 @@ class NewMixtapeController {
     private $mixtapeModel;
     private $mixtapeRepository;
 
+    // Fields to handle string dependencies
+    private static $mixtapeName = "mixtapeName";
+    private static $mixtapeRows = "mixtapeLinks";
+    private static $mixtapeID = "mixtapeID";
+
+    // Getters
     public function getPostedMixtapeName() {
-        return $_POST["mixtapeName"];
+        return $_POST[self::$mixtapeName];
     }
     public function getPostedMixtapeLinks() {
-        return $_POST["mixtapeLinks"];
+        return $_POST[self::$mixtapeRows];
+    }
+    public function getMixtapeID() {
+        return $_GET[self::$mixtapeID];
     }
 
     // Constructor, connects all the layers.
@@ -81,7 +90,7 @@ class NewMixtapeController {
         // If a mixtape has been chosen to be updated, it's data is collected from the DB and presented in a "update mixtape" form.
         elseif($this->view->mixtapeUpdateChosen() && !$this->view->onClickUpdateMixtape())
         {
-            return $this->view->showPageUpdateMixtape($this->mixtapeRepository->getSingleMixtape($_GET["mixtapeID"]), $this->mixtapeRepository->getAllMixtapeRows($_GET["mixtapeID"]));
+            return $this->view->showPageUpdateMixtape($this->mixtapeRepository->getSingleMixtape($this->getMixtapeID()), $this->mixtapeRepository->getAllMixtapeRows($this->getMixtapeID()));
         }
 
         // If the button for updating a mixtape (from the mixtape form) has been clicked
