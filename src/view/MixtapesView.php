@@ -30,13 +30,22 @@ class MixtapesView {
                             <p>&nbsp;</p>
 
                             ";
-
+            $i = 0;
             // Loops out all of the mixtapes from the database.
             foreach ($mixtapes->toArray() as $mixtape) {
+                $i += 1;
+                if($i % 4 == 0)
+                {
+                    $content .= "<div class='row'>";
+                }
                 $content .= "<div class='col-md-3'><img class='img' src='src/gfx/playlistImages/" . $mixtape->getPicture() . "' />";
                 $content .= "<h4 class='noSpacing'>". $mixtape->getName() .  "</h4>";
                 $content .= "<p>". $mixtape->getCreationDate() . "</p>";
                 $content .= "<p><a class='btn btn-default' href='?action=mixtape&mixtapeID=". $mixtape->getMixtapeID() . "'>View mixtape</a></p></div>";
+                if($i % 4 == 0)
+                {
+                    $content .= "</div>";
+                }
             };
 
             $content .= "</div><p>&nbsp;</p>";

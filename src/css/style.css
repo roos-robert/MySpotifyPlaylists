@@ -33,3 +33,7 @@ body {
 .jumbotron {
     padding: 0;
 }
+
+.row {
+    margin-bottom: 15px;
+}
