@@ -1,12 +1,11 @@
 <?php
-
+// Something to fix in this class if I have the time, is to add field-size validation to this model and usermodel.
 namespace model;
 
 require_once("./src/model/UserModel.php");
 require_once("./src/model/Repository.php");
 
 class UserRepository extends Repository {
-
     private static $username = "Username";
     private static $password = "Password";
     private static $key = "LoginToken";
@@ -17,6 +16,9 @@ class UserRepository extends Repository {
         $this->dbTable = "user";
     }
 
+    // Adds a new user to the database, on adding the user, the $userSalt string is added to the $password string
+    // Then the whole string is hashed with sha1(). This to increase security for the user.
+    // Another thing of note is that the uniqe auto-login token is generated here.
     public function add($username, $password, $email) {
         $randomKey = md5(time());
         $db = $this->connection();
@@ -26,6 +28,7 @@ class UserRepository extends Repository {
         $query->execute($params);
     }
 
+    // Function for retrieving a user from the database, returns an array (to fix here is to return a UserModel object)
     public function get($username) {
         $db = $this->connection();
         $sql = "SELECT * FROM $this->dbTable WHERE " . self::$username . " = ?";
@@ -40,6 +43,7 @@ class UserRepository extends Repository {
         return NULL;
     }
 
+    // This function retrieves the uniqe login-token for a user, for automatic login with cookies.
     public function getKey($key) {
         $db = $this->connection();
         $sql = "SELECT * FROM $this->dbTable WHERE " . self::$key . " = ?";
