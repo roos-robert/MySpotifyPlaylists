@@ -9,6 +9,7 @@ class UserModel {
     private $userRepository;
     private $sessionLocation = "LoggedIn";
     private $sessionUsername = "Username";
+    private static $userSalt = "FDFsuf37474¤#23?0434sDDA"; // NOTE! This string is also present in the UserRepository. If you change this here, you must change it there as well!
     private $sessionUserID = null;
 
     public function __construct() {
@@ -21,7 +22,7 @@ class UserModel {
 
         if($user != NULL)
         {
-            if($user["Username"] == $username && $user["Password"] == md5($password))
+            if($user["Username"] == $username && $user["Password"] == sha1($password . self::$userSalt))
             {
                 $_SESSION[$this->sessionLocation] = true;
                 $_SESSION[$this->sessionUsername] = $username;

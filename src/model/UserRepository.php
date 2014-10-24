@@ -11,6 +11,7 @@ class UserRepository extends Repository {
     private static $password = "Password";
     private static $key = "LoginToken";
     private static $email = "Email";
+    private static $userSalt = "FDFsuf37474¤#23?0434sDDA"; // NOTE! This string is also present in the UserModel. If you change this here, you must change it there as well!
 
     public function __construct() {
         $this->dbTable = "user";
@@ -20,7 +21,7 @@ class UserRepository extends Repository {
         $randomKey = md5(time());
         $db = $this->connection();
         $sql = "INSERT INTO $this->dbTable(" . self::$username . ", " . self::$password . ", " . self::$key . ", " . self::$email . ") VALUES (?, ?, ?, ?)";
-        $params = array($username, md5($password), $randomKey, $email);
+        $params = array($username, sha1($password . self::$userSalt), $randomKey, $email);
         $query = $db->prepare($sql);
         $query->execute($params);
     }
