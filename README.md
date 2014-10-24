@@ -21,6 +21,10 @@ The app runs on most webservers with PHP5 and MySQL compatibility.
     3.3. From the Setting-sample.php create a Settings.php file containing the path and login information for your database   
 4. The application is up, installed and ready to go!
 
+## External resources used in this application
+
+1. Twitter Bootstrap: http://getbootstrap.com
+
 ## Further documentation
 
 In the folder "_Documentation" all the documentation for the project can be found, such as testing and UCs. Most of the documents are hosted on Google Drive, which means you will find the links for these documents in .md files.
