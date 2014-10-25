@@ -114,6 +114,16 @@ class NewMixtapeView {
             $this->messages->save("Mixtape name is missing");
             return false;
         }
+        if (strlen($this->getPostedMixtapeName()) > 50)
+        {
+            $this->messages->save("Mixtape name is too long, max 50 chars");
+            return false;
+        }
+        if(strpbrk($this->getPostedMixtapeName(), '<>""./') || strpbrk($this->getPostedMixtapeLinks(), '<>""/'))
+        {
+            $this->messages->save("Mixtape name and/or mixtape songs contains illegal characters");
+            return false;
+        }
         elseif ($this->getPostedMixtapeLinks() == "")
         {
             $this->messages->save("No mixtape links added, mixtape can't be empty");
