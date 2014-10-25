@@ -102,57 +102,63 @@ class NewMixtapeController {
         // If the button for updating a mixtape (from the mixtape form) has been clicked
         if($this->view->onClickUpdateMixtape())
         {
-            // Saving the mixtape image to server if a new image is to replace the old one
-            if (!empty($_FILES['image']['name']))
+            if ($this->view->validateMixtape())
             {
+                // Saving the mixtape image to server if a new image is to replace the old one
+                if (!empty($_FILES['image']['name']))
+                {
+                    try
+                    {
+                        $mixtapeImagePath = $this->view->uploadMixtapeImage();
+                    }
+                    catch (\Exception $e)
+                    {
+                        $this->messages->save("Image could not be saved, is it meeting the requirements?");
+                        return $this->view->showPage();
+                    }
+                }
+
+                // Saving the mixtape to the database.
                 try
                 {
-                    $mixtapeImagePath = $this->view->uploadMixtapeImage();
+                    if (empty($_FILES['image']['name']))
+                    {
+                        $this->mixtapeModel = new \model\MixtapeModel($this->userModel->retriveUserID(), $this->view->getPostedMixtapeName(), $this->view->getPostedPicPath(), $this->view->getPostedMixtapeID());
+                    }
+                    else
+                    {
+                        $this->mixtapeModel = new \model\MixtapeModel($this->userModel->retriveUserID(), $this->view->getPostedMixtapeName(), $mixtapeImagePath, $this->view->getPostedMixtapeID());
+                    }
+
+                    $this->mixtapeRepository->updateMixtape($this->mixtapeModel);
+
+                    $mixtapeLinksValidated = array();
+
+                    // Splits the values at "newline" and throws them into a array
+                    $mixtapeLinks = explode("\n", $this->getPostedMixtapeLinks());
+                    // Arrays whos indexes contains nothing are removed
+                    $emptyRemoved = array_diff($mixtapeLinks, array(''));
+
+                    // Trimming away unwanted whitespaces from the links (if they exist)
+                    foreach ($emptyRemoved as $mixtapeLink) {
+                        array_push($mixtapeLinksValidated, trim($mixtapeLink));
+                    }
+
+                    $this->mixtapeRepository->addMixtapeRow($this->mixtapeModel->getMixtapeID(), $mixtapeLinksValidated);
                 }
                 catch (\Exception $e)
                 {
-                    $this->messages->save("Image could not be saved, is it meeting the requirements?");
+                    $this->messages->save("Mixtape could not be saved, our database is a bit wonky at the moment!");
                     return $this->view->showPage();
                 }
-            }
 
-            // Saving the mixtape to the database.
-            try
+                return $this->view->showMixtapeAdded();
+            }
+            else
             {
-                if (empty($_FILES['image']['name']))
-                {
-                    $this->mixtapeModel = new \model\MixtapeModel($this->userModel->retriveUserID(), $this->view->getPostedMixtapeName(), $this->view->getPostedPicPath(), $this->view->getPostedMixtapeID());
-                }
-                else
-                {
-                    $this->mixtapeModel = new \model\MixtapeModel($this->userModel->retriveUserID(), $this->view->getPostedMixtapeName(), $mixtapeImagePath, $this->view->getPostedMixtapeID());
-                }
-
-                $this->mixtapeRepository->updateMixtape($this->mixtapeModel);
-
-                $mixtapeLinksValidated = array();
-
-                // Splits the values at "newline" and throws them into a array
-                $mixtapeLinks = explode("\n", $this->getPostedMixtapeLinks());
-                // Arrays whos indexes contains nothing are removed
-                $emptyRemoved = array_diff($mixtapeLinks, array(''));
-
-                // Trimming away unwanted whitespaces from the links (if they exist)
-                foreach ($emptyRemoved as $mixtapeLink) {
-                    array_push($mixtapeLinksValidated, trim($mixtapeLink));
-                }
-
-                $this->mixtapeRepository->addMixtapeRow($this->mixtapeModel->getMixtapeID(), $mixtapeLinksValidated);
+                return $this->view->showPageUpdateMixtape($this->mixtapeRepository->getSingleMixtape($this->getMixtapeID()), $this->mixtapeRepository->getAllMixtapeRows($this->getMixtapeID()));
             }
-            catch (\Exception $e)
-            {
-                $this->messages->save("Mixtape could not be saved, our database is a bit wonky at the moment!");
-                return $this->view->showPage();
-            }
-
-            return $this->view->showMixtapeAdded();
         }
-
         return $this->view->showPage();
     }
 }
