@@ -45,6 +45,6 @@ class MixtapesView {
             $content .= "</div><p>&nbsp;</p>";
 
             return $content;
-        
+
     }
 }

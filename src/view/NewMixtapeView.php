@@ -191,7 +191,7 @@ class NewMixtapeView {
 
                  <form action='' method='post' name='newMixtapeForm' enctype='multipart/form-data'>
                     <fieldset>
-                    <legend>Create your mixtape</legend><p style='color: red;'>" . $this->messages->load() . "</p>
+                    <legend>Update your mixtape</legend><p style='color: red;'>" . $this->messages->load() . "</p>
                     <label><strong>Mixtape name: </strong></label>
                     <input type='text' name='mixtapeName' class='form-control' value='" . $mixtape->getName() . "' /><br />
                     <label><strong>Mixtape songs: </strong></label>
