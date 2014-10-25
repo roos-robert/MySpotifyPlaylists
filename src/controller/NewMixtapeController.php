@@ -73,7 +73,7 @@ class NewMixtapeController {
                     // Checks that no more than 200 songs is trying to be added
                     if(count($emptyRemoved) > 200)
                     {
-                        $this->messages->save("As of now the max amount of songs per mixtape is 500");
+                        $this->messages->save("As of now the max amount of songs per mixtape is 200");
                         return $this->view->showPage();
                     }
 
@@ -130,8 +130,6 @@ class NewMixtapeController {
                         $this->mixtapeModel = new \model\MixtapeModel($this->userModel->retriveUserID(), $this->view->getPostedMixtapeName(), $mixtapeImagePath, $this->view->getPostedMixtapeID());
                     }
 
-                    $this->mixtapeRepository->updateMixtape($this->mixtapeModel);
-
                     $mixtapeLinksValidated = array();
 
                     // Splits the values at "newline" and throws them into a array
@@ -141,14 +139,16 @@ class NewMixtapeController {
                     // Checks that no more than 200 songs is trying to be added
                     if(count($emptyRemoved) > 200)
                     {
-                        $this->messages->save("As of now the max amount of songs per mixtape is 500");
-                        return $this->view->showPage();
+                        $this->messages->save("As of now the max amount of songs per mixtape is 200");
+                        return $this->view->showPageUpdateMixtape($this->mixtapeRepository->getSingleMixtape($this->getMixtapeID()), $this->mixtapeRepository->getAllMixtapeRows($this->getMixtapeID()));
                     }
 
                     // Trimming away unwanted whitespaces from the links (if they exist)
                     foreach ($emptyRemoved as $mixtapeLink) {
                         array_push($mixtapeLinksValidated, trim($mixtapeLink));
                     }
+
+                    $this->mixtapeRepository->updateMixtape($this->mixtapeModel);
 
                     $this->mixtapeRepository->addMixtapeRow($this->mixtapeModel->getMixtapeID(), $mixtapeLinksValidated);
                 }
