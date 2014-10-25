@@ -45,7 +45,8 @@ class HTMLView {
           <ul class='nav navbar-nav'>";
           if ($this->model->getLoginStatus() == false)
           {
-            echo "<li><a href='?action=login'>Login</a></li>
+            echo "<li><a href='?action=allMixtapes'>Browse mixtapes</a></li>
+                  <li><a href='?action=login'>Login</a></li>
                   <li><a href='?action=signup'>Register</a></li>
                   <li><a href='?action=home&about=show'>About</a></li>";
           }

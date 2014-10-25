@@ -38,6 +38,7 @@ class MixtapeController {
             // If the mixtape that is to be removed exists, then.
             if($mixtape != NULL)
             {
+                // Checks that the user trying to remove the mixtape is the creator.
                 if($mixtape->getUserID() == $this->userModel->retriveUserID())
                 {
                     try

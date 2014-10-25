@@ -96,7 +96,7 @@ class MixtapeView {
                              " . $twitterButton;
 
                 // Only presents the update and remove buttons if the logged in user is the creator of the playlist.
-                if($this->userModel->retriveUserID() == $mixtape->getUserID())
+                if(!$this->userModel->getLoginStatus() == false && $this->userModel->retriveUserID() == $mixtape->getUserID())
                 {
                     $content .= "<h3>Handle mixtape</h3>
                                 <a class='btn btn-default' href='?action=newMixtape&update=true&mixtapeID=" . $mixtape->getMixtapeID() . "'>Update mixtape</a>
