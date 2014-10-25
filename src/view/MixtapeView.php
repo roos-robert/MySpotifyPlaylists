@@ -71,14 +71,15 @@ class MixtapeView {
                 $content .= "<h1>Mixtape: " . $mixtape->getName() . "</h1>"  . $this->messages->load() . "
                             <p>" . $mixtape->getCreationDate() . "</p><p></p>
                             <img src='src/gfx/playlistImages/" . $mixtape->getPicture() . "' width='250' />
-                            <h3>Songs</h3>";
+                            <h3>Songs</h3>
+                            <p>Click/tap the play icon to play song in Spotify</p><p>&nbsp;</p>";
 
                 foreach ($mixtapeRows->toArray() as $mixtapeRow) {
                     $string = file_get_contents("http://ws.spotify.com/lookup/1/.json?uri=" . $mixtapeRow->getSong());
                     $res = json_decode($string, true);
                     $trackArtists = $res["track"]["artists"];
 
-                    $content .= "<div class='row'><div class='col-md-12'><a href='" . $mixtapeRow->getSong() . "' class='glyphicon glyphicon-play' title='Click to play in Spotify'></a> ";
+                    $content .= "<div class='row' style='margin-bottom: -20px;'><div class='col-md-12'><a href='" . $mixtapeRow->getSong() . "' class='glyphicon glyphicon-play' title='Click to play in Spotify'></a> ";
 
                     // Since a song can have several artists, these are delivered as a object in the JSON-request.
                     foreach ($trackArtists as $trackArtist) {
