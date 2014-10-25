@@ -12,13 +12,7 @@ class MixtapesView {
     }
 
     public function showPage(\model\MixtapeList $mixtapes) {
-        if($this->userModel->getLoginStatus() === false)
-        {
-            header('Location: index.php');
-            exit;
-        }
-        else
-        {
+
             $content = "
                 <div class='jumbotron'>
                   <div class='container'>
@@ -51,6 +45,6 @@ class MixtapesView {
             $content .= "</div><p>&nbsp;</p>";
 
             return $content;
-        }
+        
     }
 }
