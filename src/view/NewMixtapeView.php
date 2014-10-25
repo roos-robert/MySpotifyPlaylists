@@ -194,7 +194,7 @@ class NewMixtapeView {
                     <legend>Update your mixtape</legend><p style='color: red;'>" . $this->messages->load() . "</p>
                     <label><strong>Mixtape name: </strong></label>
                     <input type='text' name='mixtapeName' class='form-control' value='" . $mixtape->getName() . "' /><br />
-                    <label><strong>Mixtape songs: </strong></label>
+                    <label><strong>Mixtape songs (max 200): </strong></label>
                     <textarea class='form-control' rows='20' name='mixtapeLinks'>";
 
                     // Loops out all of the mixtapes row into the textarea.
@@ -244,7 +244,7 @@ class NewMixtapeView {
                     <legend>Create your new mixtape</legend><p style='color: red;'>" . $this->messages->load() . "</p>
                     <label><strong>Mixtape name: </strong></label>
                     <input type='text' name='mixtapeName' class='form-control' value='$mixtapeName' /><br />
-                    <label><strong>Mixtape songs (max 500): </strong></label>
+                    <label><strong>Mixtape songs (max 200): </strong></label>
                     <textarea class='form-control' rows='20' name='mixtapeLinks'></textarea><br />
                     <label><strong>Choose a mixtape image (max 200kb): </strong></label>
                     <input type='file' name='image'><br />

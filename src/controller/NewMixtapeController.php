@@ -70,8 +70,8 @@ class NewMixtapeController {
                     $mixtapeLinks = explode("\n", $this->getPostedMixtapeLinks());
                     // Arrays whos indexes contains nothing are removed
                     $emptyRemoved = array_diff($mixtapeLinks, array(''));
-                    // Checks that no more than 500 songs is trying to be added
-                    if(count($emptyRemoved) > 500)
+                    // Checks that no more than 200 songs is trying to be added
+                    if(count($emptyRemoved) > 200)
                     {
                         $this->messages->save("As of now the max amount of songs per mixtape is 500");
                         return $this->view->showPage();
@@ -138,8 +138,8 @@ class NewMixtapeController {
                     $mixtapeLinks = explode("\n", $this->getPostedMixtapeLinks());
                     // Arrays whos indexes contains nothing are removed
                     $emptyRemoved = array_diff($mixtapeLinks, array(''));
-                    // Checks that no more than 500 songs is trying to be added
-                    if(count($emptyRemoved) > 500)
+                    // Checks that no more than 200 songs is trying to be added
+                    if(count($emptyRemoved) > 200)
                     {
                         $this->messages->save("As of now the max amount of songs per mixtape is 500");
                         return $this->view->showPage();
