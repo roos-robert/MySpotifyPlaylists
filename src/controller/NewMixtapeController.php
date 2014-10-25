@@ -138,6 +138,12 @@ class NewMixtapeController {
                     $mixtapeLinks = explode("\n", $this->getPostedMixtapeLinks());
                     // Arrays whos indexes contains nothing are removed
                     $emptyRemoved = array_diff($mixtapeLinks, array(''));
+                    // Checks that no more than 500 songs is trying to be added
+                    if(count($emptyRemoved) > 500)
+                    {
+                        $this->messages->save("As of now the max amount of songs per mixtape is 500");
+                        return $this->view->showPage();
+                    }
 
                     // Trimming away unwanted whitespaces from the links (if they exist)
                     foreach ($emptyRemoved as $mixtapeLink) {
